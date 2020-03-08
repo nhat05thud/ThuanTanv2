@@ -1,0 +1,30 @@
+﻿@using Umbraco.Web.Models
+@inherits UmbracoViewPage<ThuanTanUmbraco.Models.Product>
+@{
+    var content = Model.RenderProduct.Content;
+    var colorNested = (List<IPublishedContent>)content.GetPropertyValue<IEnumerable<IPublishedContent>>("productColors");
+}
+
+@if (colorNested != null && colorNested.Any())
+{
+    var item = colorNested.FirstOrDefault(x => x.GetPropertyValue<string>("color").Trim().Replace(" ", "").Equals(Model.Color.Trim().Replace(" ", "")));
+    if (item != null)
+    {
+        var thumb = Umbraco.TypedMedia(item.GetPropertyValue<int>("image"));
+        var listImages = (List<IPublishedContent>)item.GetPropertyValue<IEnumerable<IPublishedContent>>("listImage");
+        <div class="main-image">
+            <img src="@(thumb != null ? thumb.GetCropUrl(550, 550, imageCropMode: ImageCropMode.BoxPad, furtherOptions: "&bgcolor=fff&slimmage=true") : "https://via.placeholder.com/550x550")" alt="@content.Name" />
+        </div>
+        if (listImages != null)
+        {
+            <div class="more-image owl-carousel">
+                @foreach (var img in listImages)
+                {
+                    <div class="item">
+                        <img src="@img.GetCropUrl(90, 90, furtherOptions: "&slimmage=true")" alt="@content.Name" />
+                    </div>
+                }
+            </div>
+        }
+    }
+}

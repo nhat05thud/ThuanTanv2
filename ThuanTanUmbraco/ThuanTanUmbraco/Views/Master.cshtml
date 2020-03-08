@@ -1,0 +1,71 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = null;
+    Html.EnableClientValidation(true);
+    Html.EnableUnobtrusiveJavaScript(true);
+    Html.EnableClientValidation(true);
+    Html.EnableUnobtrusiveJavaScript(true);
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/libs/owl-carousel/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="/libs/malihu/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+    <link href="/css/toastr.min.css" rel="stylesheet" />
+    <link href="/css/fonts.css" rel="stylesheet" />
+    <link href="/images/mysprite.sprite.css" rel="stylesheet" />
+    <link href="/css/site.css" rel="stylesheet" />
+    <link href="/css/custom-master.css" rel="stylesheet" />
+    <script src="/scripts/jquery.min.js"></script>
+    @Html.Partial("~/Views/Partials/Layout/_Share.cshtml")
+</head>
+<body>
+    <div id="wrapper">
+        <div id="wrapper-in">
+            @Html.Partial("~/Views/Partials/Layout/_Header.cshtml")
+            <div id="mobile-overlay"></div>
+            <div id="main-content">
+                @RenderBody()
+            </div>
+            @Html.Partial("~/Views/Partials/Layout/_Footer.cshtml")
+        </div>
+        <div id="menumobile" class="mobile-panel mobilep-left">
+            <div class="menu-in">
+                <div class="menu-mobile">
+                    <div class="logo">
+                        <a id="A2" href="/">
+                            <img class="img-fluid" src="/images/logo.png" alt="logo" />
+                        </a>
+                    </div>
+                    <ul id="menuMobiles" class="menu-nav"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="scroll-to-top"></a>
+    <script src="/Scripts/popper.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/jquery.panel.mobile.js"></script>
+    <script src="/libs/owl-carousel/scripts/owl.carousel.min.js"></script>
+    <script src="/libs/malihu/scripts/jquery.mCustomScrollbar.min.js"></script>
+    <script src="/Scripts/sweetalert.min.js"></script>
+    <script src="/Scripts/toastr.min.js"></script>
+
+    <script src="/scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="/scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+    <script src="/scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+
+    <script src="/Scripts/cartController.js"></script>
+    <script src="/Scripts/filterProductController.js"></script>
+
+    <script src="/scripts/jquery.main.js"></script>
+
+</body>
+</html>

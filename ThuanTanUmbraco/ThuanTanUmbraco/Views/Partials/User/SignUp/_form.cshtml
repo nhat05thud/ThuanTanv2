@@ -1,0 +1,65 @@
+﻿@inherits UmbracoViewPage<ThuanTanUmbraco.Models.RegisterForm>
+@{
+    if (!string.IsNullOrEmpty(Model.ResponseText) && Model.IsRegisterSuccess == false)
+    {
+        <div class="field-validation-error" style="margin-bottom: 10px;">
+            @Model.ResponseText
+        </div>
+    }
+}
+@Html.AntiForgeryToken()
+@if (Model.IsRegisterSuccess)
+{
+    @Html.HiddenFor(x => x.IsSendMail, new { value = true })
+    @Html.HiddenFor(x => x.Username)
+    <div class="message__sendmail--register" style="margin-bottom: 30px;">
+        <p>Email xác nhận sẽ được gửi vào hộp thư <b>@Model.Username</b>. Nếu bạn không nhận được email xác nhận, vui lòng bấm vào nút <b>Gửi email xác nhận</b> bên dưới để tiến hành gửi lại.</p>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Gửi email xác nhận" style="width: auto">
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="item">
+                @Html.TextBoxFor(x => x.FirstName, new { placeholder = "Họ" })
+                @Html.ValidationMessageFor(x => x.FirstName)
+            </div>
+            <div class="item">
+                @Html.TextBoxFor(x => x.LastName, new { placeholder = "Tên" })
+                @Html.ValidationMessageFor(x => x.LastName)
+            </div>
+            <div class="item">
+                @Html.TextBoxFor(x => x.Username, new { placeholder = "Email" })
+                @Html.ValidationMessageFor(x => x.Username)
+            </div>
+            <div class="item">
+                @Html.TextBoxFor(x => x.PhoneNumber, new { placeholder = "Số điện thoại" })
+                @Html.ValidationMessageFor(x => x.PhoneNumber)
+            </div>
+            <div class="item">
+                @Html.TextBoxFor(x => x.Address, new { placeholder = "Địa chỉ" })
+                @Html.ValidationMessageFor(x => x.Address)
+            </div>
+            <div class="item">
+                @Html.PasswordFor(x => x.Password, new { placeholder = "Mật khẩu" })
+                @Html.ValidationMessageFor(x => x.Password)
+            </div>
+            <div class="item">
+                @Html.PasswordFor(x => x.ConfirmPassword, new { placeholder = "Xác nhận mật khẩu" })
+                @Html.ValidationMessageFor(x => x.ConfirmPassword)
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" value="Đăng ký" style="width: auto">
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(x => x.CultureLcid)
+    <div class="loading_div"></div>
+}

@@ -1,0 +1,114 @@
+﻿@inherits UmbracoViewPage<ThuanTanUmbraco.Models.CheckOut>
+
+<div class="check-out__group">
+    <h1>Lựa chọn hình thức thanh toán</h1>
+    <div class="check-out__group--content">
+        <label class="custom-radio-button">
+            Thanh toán tiền mặt khi nhận hàng
+            <input type="radio" checked="checked" value="Thanh Toán tiền mặt" name="PaymentMethods">
+            <span class="checkmark"></span>
+        </label>
+        <label class="custom-radio-button">
+            Chuyển khoản
+            <input type="radio" value="Chuyển khoản" name="PaymentMethods">
+            <span class="checkmark"></span>
+        </label>
+    </div>
+</div>
+<div class="check-out__group">
+    <h1>Điền thông tin nhận hàng</h1>
+    <div class="check-out__group--content">
+        @if (Members.IsLoggedIn())
+        {
+            var memberService = ApplicationContext.Current.Services.MemberService;
+            var currentMemberId = Members.GetCurrentMemberId();
+            var currentMember = memberService.GetById(currentMemberId);
+            if (currentMember != null)
+            {
+
+                <div class="form-item">
+                    <label>Họ tên <span>*</span></label>
+                    <div class="input-wrapper">
+                        @Html.TextBoxFor(x => x.Name, new { Value = currentMember.Name, @readonly = "readonly" })
+                        @Html.ValidationMessageFor(x => x.Name)
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label>Điện thoại di động <span>*</span></label>
+                    <div class="input-wrapper">
+                        @if(!string.IsNullOrEmpty(currentMember.GetValue<string>("phoneNumber"))){
+                            @Html.TextBoxFor(x => x.PhoneNumber, new { Value = currentMember.GetValue("phoneNumber"), @readonly = "readonly" })
+                        }
+                        else{
+                            @Html.TextBoxFor(x => x.PhoneNumber, new { Value = currentMember.GetValue("phoneNumber") })
+                        }
+                        @Html.ValidationMessageFor(x => x.PhoneNumber)
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label>Email <span>*</span></label>
+                    <div class="input-wrapper">
+                        @Html.TextBoxFor(x => x.Email, new { Value = currentMember.Email, @readonly = "readonly" })
+                        @Html.ValidationMessageFor(x => x.Email)
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label>Địa chỉ giao hàng <span>*</span></label>
+                    <div class="input-wrapper">
+                        <textarea id="Address" name="Address">@currentMember.GetValue("address")</textarea>
+                        @Html.ValidationMessageFor(x => x.Address)
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label>Chi chú</label>
+                    <div class="input-wrapper">
+                        @Html.TextAreaFor(model => model.Note, new { placeholder = "Ghi chú cho nhân viên giao hàng" })
+                    </div>
+                </div>
+                @Html.HiddenFor(x=>x.MemberId, new { Value= currentMemberId })
+            }
+        }
+        else
+        {
+            <div class="form-item">
+                <label>Họ tên <span>*</span></label>
+                <div class="input-wrapper">
+                    @Html.TextBoxFor(model => model.Name, new { placeholder = "Nhập họ tên đầy đủ" })
+                    @Html.ValidationMessageFor(x => x.Name)
+                </div>
+            </div>
+            <div class="form-item">
+                <label>Điện thoại di động <span>*</span></label>
+                <div class="input-wrapper">
+                    @Html.TextBoxFor(model => model.PhoneNumber, new { placeholder = "Nhập số điện thoại" })
+                    @Html.ValidationMessageFor(x => x.PhoneNumber)
+                </div>
+            </div>
+            <div class="form-item">
+                <label>Email <span>*</span></label>
+                <div class="input-wrapper">
+                    @Html.TextBoxFor(model => model.Email, new { placeholder = "Nhập email" })
+                    @Html.ValidationMessageFor(x => x.Email)
+                </div>
+            </div>
+            <div class="form-item">
+                <label>Địa chỉ giao hàng <span>*</span></label>
+                <div class="input-wrapper">
+                    @Html.TextAreaFor(model => model.Address, new { placeholder = "Nhập địa chỉ giao hàng cụ thể" })
+                    @Html.ValidationMessageFor(x => x.Address)
+                </div>
+            </div>
+            <div class="form-item">
+                <label>Chi chú</label>
+                <div class="input-wrapper">
+                    @Html.TextAreaFor(model => model.Note, new { placeholder = "Ghi chú cho nhân viên giao hàng" })
+                </div>
+            </div>
+            @Html.HiddenFor(x=>x.MemberId, new { Value = 0 })
+        }
+        @Html.HiddenFor(x => x.CultureLcid)
+    </div>
+</div>
+<div class="footer-checkout">
+    <input type="submit" value="Hoàn Tất" />
+</div>

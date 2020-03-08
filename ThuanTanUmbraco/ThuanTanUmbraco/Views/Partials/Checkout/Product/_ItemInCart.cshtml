@@ -1,0 +1,28 @@
+﻿@inherits UmbracoViewPage<List<ThuanTanUmbraco.Models.CartItem>>
+
+<div class="checkout-product-wrap">
+    @foreach (var item in Model)
+    {
+        <div class="cart-item">
+            <div class="img">
+                <a href="@item.Url">
+                    <img src="@item.Image" alt="@item.Name" />
+                </a>
+            </div>
+            <div class="content">
+                <a href="@item.Url">@item.Name</a>
+                <p class="price">@(string.Format("{0:#,0}", item.Price)) VND <span>x@(item.Quantity)</span></p>
+                <p class="color">Màu: @(string.Format("{0:#,0}", item.Color))</p>
+            </div>
+        </div>
+        <input type="hidden" name="CartItems[@Model.IndexOf(item)].Id" value="@item.Id" />
+        <input type="hidden" name="CartItems[@Model.IndexOf(item)].Quantity" value="@item.Quantity" />
+        <input type="hidden" name="CartItems[@Model.IndexOf(item)].Price" value="@item.Price" />
+        <input type="hidden" name="CartItems[@Model.IndexOf(item)].Color" value="@item.Color" />
+    }
+</div>
+<div class="checkout-product-price">
+    <ul>
+        <li>Thành tiền: <span class="total">@(string.Format("{0:#,0}", Model.Sum(x => x.Price * x.Quantity))) VND</span></li>
+    </ul>
+</div>

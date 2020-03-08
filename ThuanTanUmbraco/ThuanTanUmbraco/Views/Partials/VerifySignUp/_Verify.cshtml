@@ -1,0 +1,26 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@if (ViewBag.IsHasQuery != null && ViewBag.IsHasQuery == true)
+{
+    <div class="wrap-verify__member" style="min-height: 400px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content">
+                        <div class="@(ViewBag.IsSuccess ? "field-validation-success" : "field-validation-error")" style="font-size: 14px;">
+                            <p>@Html.Raw(ViewBag.ResponseText)</p>
+                        </div>
+                        <div class="text-center" style="margin-top: 15px;">
+                            <a class="btn-custom__login" href="@(!string.IsNullOrEmpty(ViewBag.SignInLink) ? ViewBag.SignInLink : "#")" style="display: inline-block">Đăng nhập</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <script type="text/javascript">
+        window.location = "@CurrentPage.AncestorOrSelf(1).Url";
+    </script>
+}

@@ -1,0 +1,50 @@
+﻿@inherits UmbracoViewPage<ThuanTanUmbraco.Models.ContactForm>
+@{
+    Model.CultureLcid = System.Globalization.CultureInfo.CurrentUICulture.LCID;
+    if (!string.IsNullOrEmpty(Model.ErrorMsg))
+    {
+        <div id="divUpdateMessage">
+            @Model.ErrorMsg
+        </div>
+    }
+}
+@Html.AntiForgeryToken()
+<div class="wrap-send">
+    <div class="contact-w">
+        <div class="contact-input">
+            @Html.TextBoxFor(model => model.Name, new { @class = "contact-textbox", placeholder = Umbraco.GetDictionaryValue("Form.Field.Name") })
+            @Html.ValidationMessageFor(x => x.Name)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="contact-w">
+                <div class="contact-input">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "contact-textbox", placeholder = "Email" })
+                    @Html.ValidationMessageFor(x => x.Email)
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="contact-w">
+                <div class="contact-input">
+                    @Html.TextBoxFor(model => model.Phone, new { @class = "contact-textbox", placeholder = Umbraco.GetDictionaryValue("Form.Field.Phone") })
+                    @Html.ValidationMessageFor(x => x.Phone)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contact-w">
+        <div class="contact-input">
+            @Html.TextAreaFor(model => model.Message, new { @class = "contact-area", placeholder = Umbraco.GetDictionaryValue("Form.Field.Message") })
+            @Html.ValidationMessageFor(x => x.Message)
+        </div>
+    </div>
+    <div class="contact-w">
+        <div class="contact-btn">
+            <input type="submit" class="button-btn" name="" value="@Umbraco.GetDictionaryValue("Send")" />
+        </div>
+    </div>
+</div>
+@Html.HiddenFor(x => x.CultureLcid)
+<div class="loading_div"></div>

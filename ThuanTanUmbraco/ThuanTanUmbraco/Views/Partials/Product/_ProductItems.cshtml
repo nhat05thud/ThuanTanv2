@@ -1,0 +1,124 @@
+﻿@using Umbraco.Web.Models
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    var node = (IPublishedContent)CurrentPage;
+    var paramColor = Request.Params["colors"];
+    var items = new List<IPublishedContent>();
+    if (!string.IsNullOrEmpty(paramColor))
+    {
+        var listColors = paramColor.Split(',');
+        var productItems = node.Children.ToList();
+        foreach (var item in productItems)
+        {
+            var colorNested = item.GetPropertyValue<List<IPublishedContent>>("productColors");
+            if (colorNested != null)
+            {
+                foreach (var color in colorNested)
+                {
+                    if (listColors.Contains(color.GetPropertyValue<string>("color").Replace(" ","")) 
+                        && !items.Contains(item))
+                    {
+                        items.Add(item);
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        items = node.Children.ToList();
+    }
+    var child = items.OrderByDescending(x => x.SortOrder).ToList();
+    var pageSize = 16;
+
+    var page = 1; int.TryParse(Request.QueryString["page"], out page);
+    var totalPages = (int)Math.Ceiling((double)child.Count() / (double)pageSize);
+
+    if (page > totalPages)
+    {
+        page = totalPages;
+    }
+    else if (page < 1)
+    {
+        page = 1;
+    }
+}
+<div class="wrap-main__product">
+    <h1 class="main-title">@node.Name</h1>
+    <div class="row">
+        @foreach (var item in child.Skip((page - 1) * pageSize).Take(pageSize))
+        {
+            var colorNested = item.GetPropertyValue<IEnumerable<IPublishedContent>>("productColors");
+            <div class="col-md-4">
+                <div class="item__grid--2">
+                    <div class="img">
+                        <a href="@item.Url">
+                            @if (colorNested != null && colorNested.Any())
+                            {
+                                var itemColor = colorNested.First();
+                                var thumb = Umbraco.TypedMedia(itemColor.GetPropertyValue<int>("image"));
+                                <img class="item-image" src="@(thumb != null ? thumb.GetCropUrl(270, 240, imageCropMode: ImageCropMode.BoxPad, furtherOptions: "&bgcolor=fff&slimmage=true") : "https://via.placeholder.com/270x240")" alt="@item.Name" />
+                            }
+                            else
+                            {
+                                <img class="item-image" src="https://via.placeholder.com/270x240" alt="@item.Name" />
+                                <b>1</b>
+                            }
+                            @if (item.GetPropertyValue<double>("promotion") > 0)
+                            {
+                                <p class="percent">-@(item.GetPropertyValue<double>("promotion"))%</p>
+                            }
+                        </a>
+                    </div>
+                    <div class="content">
+                        <a class="item-title" data-id="@item.Id" href="@item.Url">@item.Name</a>
+                        <div class="desc">
+                            @item.GetPropertyValue("description")
+                        </div>
+                        <p class="price">
+                            @if (item.GetPropertyValue<int>("price") > 0)
+                            {
+                                if (item.GetPropertyValue<double>("promotion") > 0)
+                                {
+                                    <span class="current-price">
+                                        <span>@(string.Format("{0:#,0}", Math.Round(item.GetPropertyValue<double>("price") * (100 - item.GetPropertyValue<double>("promotion")) / 100, MidpointRounding.AwayFromZero)))</span> <text>VND</text>
+                                    </span>
+                                    <span>
+                                        <span>
+                                            @(string.Format("{0:#,0}", item.GetPropertyValue("price")))
+                                        </span> VND
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="current-price">
+                                        <span>
+                                            @(string.Format("{0:#,0}", item.GetPropertyValue("price")))
+                                        </span> <text>VND</text>
+                                    </span>
+                                }
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    @if (totalPages > 1)
+    {
+        <div class="pager text-center">
+            @if (page > 1)
+            {
+                <a class="prev" href="?page=@(page-1)"><i class="fa fa-angle-left"></i></a>
+            }
+            @for (int p = 1; p < totalPages + 1; p++)
+            {
+                <a class="@(p == page ? "current" : string.Empty)" href="?page=@p">@p</a>
+            }
+            @if (page < totalPages)
+            {
+                <a class="next" href="?page=@(page+1)"><i class="fa fa-angle-right"></i></a>
+            }
+        </div>
+    }
+</div>

@@ -1,0 +1,21 @@
+﻿@inherits UmbracoViewPage<ThuanTanUmbraco.Models.ResetPasswordForm>
+@{
+    if (!string.IsNullOrEmpty(Model.ResponseText))
+    {
+        <div class="@(Model.IsSuccess ? "field-validation-success" : "field-validation-error")" style="margin-bottom: 10px;">
+            @Model.ResponseText
+        </div>
+    }
+}
+@Html.AntiForgeryToken()
+<div class="item">
+    @Html.TextBoxFor(x => x.Email, new { placeholder = "Email" })
+    @Html.ValidationMessageFor(x => x.Email)
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <input type="submit" value="Đặt lại mật khẩu" style="width: auto">
+    </div>
+</div>
+@Html.HiddenFor(x => x.CultureLcid)
+<div class="loading_div"></div>

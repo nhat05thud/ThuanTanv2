@@ -1,0 +1,21 @@
+{
+  "images": {
+    "cart": "cart.png",
+    "ft-local": "ft-local.png",
+    "ft-mail": "ft-mail.png",
+    "ft-phone": "ft-phone.png",
+    "ft-web": "ft-web.png",
+    "search": "search.png",
+    "user": "user.png"
+  },
+  "orientation": "vertical",
+  "optimize": "lossless",
+  "padding": 10,
+  "output": "png",
+  "stylesheet": "css",
+  "pathprefix": "",
+  "customstyles": {
+    "display": "inline-block"
+  },
+  "appendcachebustspritesuffix": false
+}

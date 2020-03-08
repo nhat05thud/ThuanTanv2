@@ -1,0 +1,8 @@
+﻿@inherits UmbracoViewPage<ThuanTanUmbraco.Models.ContactForm>
+@{}
+@using (Ajax.BeginForm("HandleContactForm", "Site", null, new AjaxOptions { UpdateTargetId = "contentAjaxForm", HttpMethod = "POST", OnSuccess = "onSuccess", OnFailure = "onFailure" }, new { id = "contactForm", @class = "ajaxForm" }))
+{
+    <div id="contentAjaxForm">
+        @Html.Partial("~/Views/Partials/Contact/_Form.cshtml", Model)
+    </div>
+}

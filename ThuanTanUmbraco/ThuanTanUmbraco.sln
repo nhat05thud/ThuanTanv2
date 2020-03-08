@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThuanTanUmbraco", "ThuanTanUmbraco\ThuanTanUmbraco.csproj", "{A69B1EB0-C7B0-47A3-908D-00B3AD4A70E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThuanTan.Entity", "ThuanTan.Entity\ThuanTan.Entity.csproj", "{801062E2-658A-429A-955C-91F3121CC7BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A69B1EB0-C7B0-47A3-908D-00B3AD4A70E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A69B1EB0-C7B0-47A3-908D-00B3AD4A70E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A69B1EB0-C7B0-47A3-908D-00B3AD4A70E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A69B1EB0-C7B0-47A3-908D-00B3AD4A70E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{801062E2-658A-429A-955C-91F3121CC7BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{801062E2-658A-429A-955C-91F3121CC7BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{801062E2-658A-429A-955C-91F3121CC7BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{801062E2-658A-429A-955C-91F3121CC7BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {845AAA15-7846-4F2C-9CDB-1963349B5EAF}
+	EndGlobalSection
+EndGlobal

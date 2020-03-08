@@ -1,0 +1,88 @@
+﻿@using System.Globalization
+@using Umbraco.Web.Models
+@inherits UmbracoViewPage<ThuanTanUmbraco.Models.CartBackendModel>
+@{
+    var total = 0;
+}
+<style type="text/css">
+    .group-information {
+        padding: 15px 0;
+    }
+    .group-products > h1 {
+        font-size: 18px;
+        margin: 0 0 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .group-products .list-products .item {
+        padding: 5px 0;
+        font-size: 0;
+    }
+    .group-products .list-products .item .img,
+    .group-products .list-products .item .content {
+        display: inline-block;
+        vertical-align: top;
+        font-size: 14px;
+    }
+    .group-products .list-products .item .img {
+        width: 75px;
+    }
+    .group-products .list-products .item .img img {
+        width: 100%;
+    }
+    .group-products .list-products .item .content {
+        width: calc(100% - 75px);
+        padding-left: 10px;
+    }
+    .group-products .list-products .item .content > a {
+        color: #000;
+        text-decoration: underline;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+    .group-products .list-products .item .content p.price span {
+        color: red;
+    }
+    .total-label span {
+        color: red;
+        font-weight: bold;
+        font-size: 15px;
+    }
+</style>
+<div class="wrap-cart-detail">
+    <div class="group-information">
+        <p><b>Tên:</b> @Model.Name</p>
+        <p><b>Email:</b> @Model.Email</p>
+        <p><b>Số điện thoại:</b> @Model.PhoneNumber</p>
+        <p><b>Địa chỉ giao hàng:</b> @Model.Address</p>
+        <p><b>Ghi chú:</b> @Model.Note</p>
+        <p><b>Hình thức thanh toán: </b> @Model.PaymentMethods</p>
+    </div>
+    <div class="group-products">
+        <h1>Đơn hàng</h1>
+        <div class="list-products">
+            @foreach (var node in Model.ProductCartBackends)
+            {
+                var culture = CultureInfo.CurrentCulture;
+                var item = new RenderModel(Umbraco.TypedContent(node.ProductId), culture).Content;
+                var thumb = Umbraco.TypedMedia(item.GetPropertyValue<int>("image"));
+                total += node.Price * node.Quantity;
+                <div class="item">
+                    <div class="img">
+                        <a href="@item.Url">
+                            <img src="@(thumb != null ? thumb.GetCropUrl(75, 75, furtherOptions: "&slimmage=true") : "https://via.placeholder.com/75x75")" alt="@item.Name" />
+                        </a>
+                    </div>
+                    <div class="content">
+                        <a href="@item.Url">@item.Name</a>
+                        <p class="price"><span>@(string.Format("{0:#,0}", node.Price)) VND</span> x@(node.Quantity)</p>
+                        <p class="color">Màu: @(node.Color)</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<p class="total-label text-right">Tổng tiền: <span>@(string.Format("{0:#,0}", total)) VND</span></p>
+

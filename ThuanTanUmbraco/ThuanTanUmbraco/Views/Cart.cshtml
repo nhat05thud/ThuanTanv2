@@ -1,0 +1,12 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Master.cshtml";
+}
+
+<div class="check-out__wrap">
+    <div class="container">
+        <div id="wrapper-cart">
+            @Html.Action("RenderCartDetail", "Cart")
+        </div>
+    </div>
+</div>

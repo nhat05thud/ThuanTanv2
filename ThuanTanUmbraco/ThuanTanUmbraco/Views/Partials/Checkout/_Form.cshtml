@@ -1,0 +1,28 @@
+﻿@inherits UmbracoViewPage<ThuanTanUmbraco.Models.CheckOut>
+@{
+    Model.CultureLcid = System.Globalization.CultureInfo.CurrentUICulture.LCID;
+}
+@if (Model.IsSuccess)
+{
+    <div class="notification-wrapper" style="margin-bottom: 30px;">
+        <p>Bạn đã đặt hàng thành công! Quản trị viên sẽ liên hệ với bạn để xác nhận trong thời gian sớm nha. Cảm ơn bạn đã đặt hàng!!</p>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-8">
+            @Html.Partial("~/Views/Partials/Checkout/Information/_information.cshtml", Model)
+        </div>
+        <div class="col-md-4">
+            <div class="check-out__group">
+                <h1>Giỏ hàng</h1>
+                <div class="check-out__group--content">
+                    @Html.Partial("~/Views/Partials/Checkout/Product/_ItemInCart.cshtml", Model.CartItems)
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(x => x.CultureLcid)
+    <div class="loading_div"></div>
+}

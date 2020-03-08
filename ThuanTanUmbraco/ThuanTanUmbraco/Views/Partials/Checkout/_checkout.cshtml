@@ -1,0 +1,28 @@
+﻿@inherits UmbracoViewPage<ThuanTanUmbraco.Models.CheckOut>
+
+<div class="check-out__wrap">
+    <div class="container">
+        @if (Model.CartItems != null && Model.CartItems.Count > 0)
+        {
+            using (Ajax.BeginForm("CheckOut",
+                "CheckOut",
+                null,
+                new AjaxOptions
+                {
+                    UpdateTargetId = "checkOutAjax",
+                    HttpMethod = "POST",
+                    OnSuccess = "onSuccess",
+                    OnFailure = "onFailure"
+                }, new { @class = "ajaxForm" }))
+            {
+                <div id="checkOutAjax">
+                    @Html.Partial("~/Views/Partials/Checkout/_Form.cshtml")
+                </div>
+            }
+        }
+        else
+        {
+            @Html.Partial("~/Views/Partials/Cart/_CartEmpty.cshtml")
+        }
+    </div>
+</div>

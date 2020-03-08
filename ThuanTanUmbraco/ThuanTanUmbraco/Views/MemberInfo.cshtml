@@ -1,0 +1,15 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Master.cshtml";
+}
+
+@if (Members.IsLoggedIn())
+{
+    <p>Đã login</p>
+}
+else
+{
+    <script type="text/javascript">
+        window.location = "@CurrentPage.AncestorOrSelf(1).Url";
+    </script>
+}

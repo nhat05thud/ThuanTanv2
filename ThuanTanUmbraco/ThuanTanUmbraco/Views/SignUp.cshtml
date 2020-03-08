@@ -1,0 +1,35 @@
+﻿@using ThuanTanUmbraco.Models
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Master.cshtml";
+    var node = (IPublishedContent)CurrentPage;
+}
+@Html.Partial("~/Views/Partials/Layout/_BreadCrumb.cshtml")
+<div class="wrap-sign">
+    <div class="container">
+        <div class="title-product">
+            <h1>@node.Name</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="wrap-user__login">
+                    @using (Ajax.BeginForm("MemberSignUp",
+                        "MemberFrontEnd",
+                        null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "signUpAjax",
+                            HttpMethod = "POST",
+                            OnSuccess = "onSuccess",
+                            OnFailure = "onFailure"
+                        }, new { @class = "ajaxForm" }))
+                    {
+                        <div id="signUpAjax">
+                            @Html.Partial("~/Views/Partials/User/SignUp/_Form.cshtml", new RegisterForm{ CultureLcid = System.Globalization.CultureInfo.CurrentUICulture.LCID })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

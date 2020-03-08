@@ -1,0 +1,50 @@
+﻿@inherits UmbracoViewPage<List<ThuanTanUmbraco.Models.CartItem>>
+
+@if (Model.Count > 0)
+{
+    <div class="cart-header">
+        <div class="row">
+            <div class="col-6">
+                <button type="button" id="keep-shopping">Tiếp tục mua hàng</button>
+            </div>
+            <div class="col-6 text-right">
+                <button type="button" id="delete-all-cart">Xóa giỏ hàng</button>
+            </div>
+        </div>
+    </div>
+    <div class="cart-body">
+        @foreach (var item in Model)
+        {
+            <div class="item">
+                <div class="cart-body__item--image">
+                    <img src="@item.Image" alt="@item.Name" />
+                </div>
+                <div class="cart-body__item--name">
+                    <a href="@item.Url">@item.Name</a>
+                </div>
+                <div class="cart-body__item--price">
+                    <span>@(string.Format("{0:#,0}", item.Price))</span> VND
+                </div>
+                <div class="cart-body__item--quantity">
+                    <button type="button" class="quantity-minus"><i class="fa fa-minus"></i></button>
+                    <input type="number" data-id="@item.Id" value="@item.Quantity" />
+                    <button type="button" class="quantity-plus"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="cart-footer text-right">
+        <ul>
+            <li>
+                <div class="label">Tổng tiền:</div>
+                <div class="currency"><span>@(string.Format("{0:#,0}", Model.Sum(x => x.Price * x.Quantity)))</span> VND</div>
+            </li>
+        </ul>
+        <div class="clr"></div>
+        <button type="button" id="payment">Thanh Toán</button>
+    </div>
+}
+else
+{
+    @Html.Partial("~/Views/Partials/Cart/_CartEmpty.cshtml")
+}

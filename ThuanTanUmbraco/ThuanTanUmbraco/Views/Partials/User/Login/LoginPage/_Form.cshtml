@@ -1,0 +1,28 @@
+﻿@inherits UmbracoViewPage<ThuanTanUmbraco.Models.LoginPageForm>
+@{
+    if (Model.IsRunScripts)
+    {
+        <script type="text/javascript">
+            swal("@Model.ResponseHeader", "@Html.Raw(Model.ResponseText)", "@(Model.IsSuccess ? "success" : "error")");
+            @if (Model.IsSuccess)
+            {
+                <text>
+            setTimeout(function() {
+                location.reload();
+            }, 200);
+                </text>
+            }
+        </script>
+    }
+}
+@Html.AntiForgeryToken()
+<div class="item">
+    @Html.TextBoxFor(x => x.Username, new { placeholder = "Email" })
+    @Html.ValidationMessageFor(x => x.Username)
+</div>
+<div class="item">
+    @Html.PasswordFor(x => x.Password, new { placeholder = "Password" })
+    @Html.ValidationMessageFor(x => x.Password)
+</div>
+@Html.HiddenFor(x => x.CultureLcid)
+<div class="login__loading--div"></div>

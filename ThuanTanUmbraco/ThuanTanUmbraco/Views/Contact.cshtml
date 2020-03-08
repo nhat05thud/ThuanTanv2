@@ -1,0 +1,22 @@
+﻿@using ThuanTanUmbraco.Models
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Master.cshtml";
+    var banners = (List<IPublishedContent>)CurrentPage.GetPropertyValue<IEnumerable<IPublishedContent>>("banner");
+}
+@if (banners != null)
+{
+    <div class="main-banner owl-carousel">
+        @foreach (var banner in banners)
+        {
+            <div class="item">
+                <img src="@banner.GetCropUrl(1260, 550, furtherOptions: "&slimmage=true")" alt="" />
+            </div>
+        }
+    </div>
+}
+<div class="w-930 w-custom">
+    <h1 class="title-main">@CurrentPage.Name</h1>
+    <p class="intro text-center">@CurrentPage.GetPropertyValue("intro")</p>
+    @Html.Partial("~/Views/Partials/Contact/_Contact.cshtml", new ContactForm())
+</div>

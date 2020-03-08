@@ -1,0 +1,50 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@if (CurrentPage != null)
+{
+    <title>@(!string.IsNullOrEmpty(CurrentPage.GetPropertyValue<string>("metaTitle")) ? CurrentPage.GetPropertyValue("metaTitle") : CurrentPage.Name)</title>
+    <meta name="description" content="@CurrentPage.GetPropertyValue("metaDescription")" />
+    <meta property="og:description" itemprop="description" content="@CurrentPage.GetPropertyValue("metaDescription")" />
+    <meta property="og:url" itemprop="url" content="@Request.Url" />
+    <meta property="og:title" itemprop="headline" content="@CurrentPage.GetPropertyValue("metaTitle")" />
+    <meta property="og:type" content="article" />
+
+    var image = Umbraco.TypedMedia(CurrentPage.GetPropertyValue<int>("metaThumbnails"));
+    if (image == null)
+    {
+        image = Umbraco.TypedMedia(CurrentPage.GetPropertyValue<int>("image")) != null ? string.Format("{0}?anchor={1}&mode={2}&width={3}&height={4}&slimmage={5}&rnd={6}", Umbraco.TypedMedia(CurrentPage.GetPropertyValue<int>("image")).Url, "center", "crop", 630, 380, true, CurrentPage.UpdateDate.ToString("ddMMyyyhhmmss")) : "/images/no-image.png";
+    }
+    else
+    {
+        image = string.Format("{0}?anchor={1}&mode={2}&width={3}&height={4}&slimmage={5}&rnd={6}", image.Url, "center", "crop", 630, 380, true, CurrentPage.UpdateDate.ToString("ddMMyyyhhmmss"));
+    }
+    <meta property="og:image" itemprop="thumbnailUrl" content="@image" />
+    string[] keywords = CurrentPage.GetPropertyValue("metaKeywords");
+    if (keywords != null)
+    {
+        var stringKeyWords = string.Empty;
+        for (var i = 0; i < keywords.Length; i++)
+        {
+            if (i == keywords.Length - 1)
+            {
+                stringKeyWords += keywords[i];
+            }
+            else
+            {
+                stringKeyWords += keywords[i] + ", ";
+            }
+        }
+        <meta name="keywords" content="@stringKeyWords" />
+    }
+    else
+    {
+        <meta name="keywords" content="Thuận Tân" />
+    }
+
+    <meta property="og:image:width" content="630" />
+    <meta property="og:image:height" content="380" />
+    <meta property="og:site_name" content="Thuận Tân" />
+}
+else
+{
+    <title>Thuận Tân</title>
+}

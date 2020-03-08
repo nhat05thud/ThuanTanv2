@@ -1,0 +1,109 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    var home = CurrentPage.AncestorOrSelf(1);
+    var footer = Model.Content.Site().FirstChild("contact");
+    var policy = Model.Content.Site().FirstChild("policy");
+    var visitor = Model.Content.Site().FirstChild("visitor");
+}
+<div class="shop-info">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="shop-time">
+                    Giờ mở cửa:<p>@home.GetPropertyValue("openTime") <span>(@home.GetPropertyValue("openDate"))</span></p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="shop-hotline">
+                    Hotline:<p>@home.GetPropertyValue("hotLine")</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="shop-newsletter">
+                    <p>Newsletter</p>
+                    <div class="newsletter-wrap">
+                        <input type="text" name="txtEmail" placeholder="Nhập địa chỉ email" />
+                        <input type="submit" value="GỬI" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Showroom</h1>
+                        @if (footer != null)
+                        {
+                            <ul class="com-info">
+                                <li><i class="mysprite ft-local"></i><span>@footer.GetPropertyValue("local")</span></li>
+                                <li><i class="mysprite ft-phone"></i><span>@footer.GetPropertyValue("phone")</span></li>
+                                <li><i class="mysprite ft-mail"></i><span>@footer.GetPropertyValue("mail")</span></li>
+                                <li><i class="mysprite ft-web"></i><span>@footer.GetPropertyValue("website")</span></li>
+                            </ul>
+                        }
+                    </div>
+                    <div class="col-md-5">
+                        <h1>Hỗ trợ khách hàng</h1>
+                        @if (policy != null)
+                        {
+                            <ul>
+                                @foreach (var item in policy.Children.Take(3))
+                                {
+                                    <li><a href="@item.Url">@item.Name</a></li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="follow-me col-md-7">
+                        <h1>Kết nối với chúng tôi</h1>
+                        @if (footer != null)
+                        {
+                            <a href="@footer.GetPropertyValue("socialFacebook")"><i class="fa fa-facebook"></i></a>
+                            <a href="@footer.GetPropertyValue("socialYoutube")"><i class="fa fa-youtube"></i></a>
+                            <a href="@footer.GetPropertyValue("socialGooglePlus")"><i class="fa fa-google-plus"></i></a>
+                        }
+                    </div>
+                    <div class="col-md-5">
+                        <h1>Thống kê truy cập</h1>
+                        <ul class="visitor">
+                            <li>
+                                Đang online: @HttpContext.Current.Application["OnlineVisitors"]
+                            </li>
+                            <li>
+                                Lượt truy cập: 
+                                @if (visitor != null)
+                                {
+                                    var childs = visitor.Children();
+                                    var n = childs.Sum(x => Convert.ToInt32(x.GetPropertyValue("lbNumber")));
+                                    <span>@n</span>
+                                }
+                                else
+                                {
+                                    <span>0</span>
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                @if (footer != null)
+                {
+                    @Html.Raw(footer.GetPropertyValue("googleMaps"))
+                }
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <div class="container">
+            <p>Copyright © @DateTime.Now.Year BRABANTIA. All Right Reserved. <a href="http://thietkewebhcm.com/" target="_blank">Thiết kế web HCQ.</a></p>
+        </div>
+    </div>
+</footer>

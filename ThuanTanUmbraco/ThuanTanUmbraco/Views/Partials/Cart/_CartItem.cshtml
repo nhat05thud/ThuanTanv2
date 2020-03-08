@@ -1,0 +1,61 @@
+﻿@using System.Globalization
+@using Umbraco.Web.Models
+@inherits UmbracoViewPage<List<ThuanTanUmbraco.Models.CartItem>>
+@{
+    var linkCheckout = "/";
+    var linkCart = "/";
+    var culture = CultureInfo.CurrentCulture;
+    var currentHomePage = ApplicationContext.Services.ContentService.GetRootContent().First(x => x.GetCulture().Name == culture.Name);
+    if (currentHomePage != null)
+    {
+        var checkout = currentHomePage.Children().FirstOrDefault(x => x.ContentType.Alias == "checkOut");
+        var cart = currentHomePage.Children().FirstOrDefault(x => x.ContentType.Alias == "cart");
+        if (checkout != null)
+        {
+            linkCheckout = new RenderModel(Umbraco.TypedContent(checkout.Id), culture).Content.Url;
+        }
+        if (cart != null)
+        {
+            linkCart = new RenderModel(Umbraco.TypedContent(cart.Id), culture).Content.Url;
+        }
+    }
+}
+@if (Model.Count > 0)
+{
+    <div class="items-in-cart">
+        @foreach (var item in Model)
+        {
+            <div class="item">
+                <div class="img">
+                    <a href="@item.Url">
+                        <img class="item-image" src="@item.Image" alt="@item.Name" />
+                    </a>
+                </div>
+                <div class="content">
+                    <a class="item-title" data-id="@item.Id" href="@item.Url">@item.Name</a>
+                    <p class="price"><span>@(string.Format("{0:#,0}", item.Price))</span> VNĐ <span class="font-weight-normal">x<span class="item-quantity">@item.Quantity</span></span></p>
+                    <p class="color"><b>Màu:</b> <span>@item.Color</span></p>
+                </div>
+                <a href="javascript:void(0)" data-id="@item.Id" data-color="@item.Color" class="remove-item">x</a>
+            </div>
+        }
+    </div>
+    <p class="total">
+        Tổng: <span><i style="font-style: normal">@(string.Format("{0:#,0}", Model.Sum(x => x.Price * x.Quantity)))</i> VNĐ</span>
+    </p>
+    <a href="@linkCheckout" class="pay">Thanh toán</a>
+    <a href="@linkCart" class="view-cart">Xem giỏ hàng</a>
+    <script type="text/javascript">
+        $(".header-right__form--cart .items-in-cart").mCustomScrollbar({
+            autoHideScrollbar: true,
+            theme: "dark-thick",
+            scrollbarPosition: "outside"
+        });
+    </script>
+}
+else
+{
+    <div class="empty-cart">
+        <p>Chưa có sản phẩm nào trong giỏ hàng</p>
+    </div>
+}

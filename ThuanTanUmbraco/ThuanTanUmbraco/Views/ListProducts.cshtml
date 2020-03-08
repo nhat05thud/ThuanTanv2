@@ -1,0 +1,17 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Master.cshtml";
+}
+@Html.Partial("~/Views/Partials/Layout/_BreadCrumb.cshtml")
+<div class="wrap-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                @Html.Partial("~/Views/Partials/Product/_aside.cshtml")
+            </div>
+            <div class="col-md-9">
+                @Html.Partial("~/Views/Partials/Product/_ProductItems.cshtml")
+            </div>
+        </div>
+    </div>
+</div>

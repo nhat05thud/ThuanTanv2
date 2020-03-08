@@ -1,0 +1,64 @@
+﻿@using ThuanTanUmbraco.Models
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    var node = (IPublishedContent)CurrentPage;
+}
+<div class="wrap-main__aside">
+    <img src="/images/ico.png" alt="" />
+    <div class="item">
+        <a href="@node.Parent.Url">@node.Parent.Name</a>
+        <ul class="ul__product--item">
+            @foreach (var item in node.Parent.Children)
+            {
+                <li @(item.Id == CurrentPage.Id ? "class=active" : null)><a href="@item.Url">@item.Name</a></li>
+            }
+        </ul>
+    </div>
+</div>
+<div class="wrap-main__aside filter--product">
+    <h1>Lọc sản phẩm</h1>
+    @{
+        var listColors = new List<ProductColor>();
+        var items = node.Descendants("productItem");
+        foreach (var item in items)
+        {
+            var colorNested = item.GetPropertyValue<List<IPublishedContent>>("productColors");
+            if (colorNested != null)
+            {
+                foreach (var color in colorNested)
+                {
+                    var getColor = ListProductColors.ProductColors.FirstOrDefault(x => x.Key == color.GetPropertyValue<string>("color").Trim().Replace(" ", ""));
+                    if (getColor != null)
+                    {
+                        var colorProperties = new ProductColor
+                        {
+                            Key = color.GetPropertyValue<string>("color"),
+                            Value = getColor.Value
+                        };
+                        if (!listColors.Contains(colorProperties))
+                        {
+                            listColors.Add(colorProperties);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @if (listColors.Any())
+    {
+        <div class="item">
+            <h5>Color</h5>
+            <ul class="color">
+                @*?colors=Almond%2CBrilliantSteel%2CClayPink*@
+                @foreach (var item in listColors)
+                {
+                    var paramColor = Request.Params["colors"];
+                    <li @(paramColor != null && paramColor.Split(',').Contains(item.Key.Replace(" ", "")) ? "class=active" : "")>
+                        <input type="hidden" class="master__color" value="@item.Key" />
+                        <span style="background: rgba@(item.Value)"></span> @item.Key
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>

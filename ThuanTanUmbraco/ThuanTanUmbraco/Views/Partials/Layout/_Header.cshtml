@@ -1,0 +1,81 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    var home = CurrentPage.AncestorOrSelf(1);
+    var logo = Umbraco.TypedMedia(home.GetPropertyValue<int>("logo"));
+}
+<div id="header">
+    <div class="container">
+        <div class="header-wrap">
+            <div class="header-logo d-inline-b ver-top pd-l-r-15">
+                <a href="@home.Url">
+                    <img alt="" src="@(logo != null ? logo.Url : "/images/logo.png")">
+                </a>
+            </div>
+            <div class="header-right d-inline-b ver-top pd-l-r-15">
+                <div class="wrap-d-p--15">
+                    <div class="header-right__menu d-inline-b ver-top pd-l-r-15">
+                        <ul id="menu" class="desktop-992">
+                            <li @(CurrentPage.Id == home.Id ? "class=active" : null)><a href="@home.Url">Trang chủ</a></li>
+                            @foreach (var childPage in home.Children())
+                            {
+                                var page = (IPublishedContent)childPage;
+                                if (page.DocumentTypeAlias == "product" 
+                                    || page.DocumentTypeAlias == "news" 
+                                    || page.DocumentTypeAlias == "policy" 
+                                    || page.DocumentTypeAlias == "contact")
+                                {
+                                    if (page.DocumentTypeAlias == "product")
+                                    {
+                                        <li class="li-dropdown @(childPage.IsAncestorOrSelf(CurrentPage) ? "active" : null)">
+                                            <a href="#">@page.Name <i class="fa fa-angle-down"></i></a>
+                                            <ul class="nav-main__sub">
+                                                <li class="submenu__presentation container">
+                                                    <ul class="submenu__holder row">
+                                                        @foreach (var child in childPage.Children)
+                                                        {
+                                                            <li class="category-item col-md-3 @(child.IsAncestorOrSelf(CurrentPage) ? "active" : null)">
+                                                                <a href="@child.Url">@child.Name <i class="fa fa-angle-right"></i></a>
+                                                                <ul>
+                                                                    @foreach (var item in child.Children)
+                                                                    {
+                                                                        <li @(item.IsAncestorOrSelf(CurrentPage) ? "class=active" : null)><a href="@item.Url">@item.Name <i class="fa fa-angle-right"></i></a></li>
+                                                                    }
+                                                                </ul>
+                                                            </li>
+                                                        }
+                                                        <li class="category-item col-md-3"><a href="#">Sản phẩm khuyến mãi <i class="fa fa-angle-right"></i></a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="@(childPage.IsAncestorOrSelf(CurrentPage) ? "active" : null)">
+                                            <a href="@childPage.Url">@childPage.Name</a>
+                                        </li>
+                                    }
+                                }
+                            }
+                        </ul>
+                        <a class="panel-a menu-mo ipadmo-992" href="#menumobile" data-position="true" data-type="false">
+                            <span class="fa fa-reorder"></span>Menu
+                        </a>
+                    </div>
+                    <div class="header-right__form d-inline-b ver-top pd-l-r-15">
+                        <div class="header-right__form--search d-inline-b ver-top pd-l-r-15">
+                            <div class="search-form">
+                                <input type="text" value="" placeholder="Tìm kiếm" />
+                                <input type="submit" value="" />
+                            </div>
+                        </div>
+                        <div class="header-right__form--cart d-inline-b ver-top pd-l-r-15">
+                            @Html.Partial("~/Views/Partials/User/_User.cshtml")
+                            @Html.Partial("~/Views/Partials/Cart/_Cart.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

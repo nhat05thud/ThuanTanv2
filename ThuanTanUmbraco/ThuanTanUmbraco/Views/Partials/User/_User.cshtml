@@ -1,0 +1,29 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    var home = CurrentPage.AncestorOrSelf(1);
+    var signUp = Model.Content.Site().FirstChild("memberInfo").FirstChild("signUp");
+}
+<div class="item user-form">
+    <div class="item-visible">
+        <i class="mysprite user"></i>
+    </div>
+    <div class="wrap-hidden">
+        @if (Members.IsLoggedIn())
+        {
+            <div style="font-size: 14px">
+                <p>Đã login</p>
+                <a href="javascript:void(0);" onclick="logout()">Logout</a>
+            </div>
+        }
+        else
+        {
+            <div class="wrap-user__login">
+                @Html.Partial("~/Views/Partials/User/Login/_Login.cshtml")
+            </div>
+            <div class="wrap-user__signup">
+                <p>@home.GetPropertyValue("userSignUpMessage")</p>
+                <a href="@(signUp != null ? signUp.Url : "#")">Tạo tài khoản</a>
+            </div>
+        }
+    </div>
+</div>

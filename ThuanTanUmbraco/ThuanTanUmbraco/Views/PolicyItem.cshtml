@@ -1,0 +1,25 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Master.cshtml";
+    var parent = CurrentPage.Parent();
+    var banners = (List<IPublishedContent>)parent.GetPropertyValue<IEnumerable<IPublishedContent>>("banner");
+}
+
+@if (banners != null)
+{
+    <div class="main-banner owl-carousel">
+        @foreach (var banner in banners)
+        {
+            <div class="item">
+                <img src="@banner.GetCropUrl(1260, 550, furtherOptions: "&slimmage=true")" alt="" />
+            </div>
+        }
+    </div>
+}
+@Html.Partial("~/Views/Partials/Layout/_BreadCrumb.cshtml")
+<div class="w-930 w-custom">
+    <h2 id="news-name">@CurrentPage.Name</h2>
+    <div class="wrap-content">
+        @CurrentPage.GetPropertyValue("content")
+    </div>
+</div>

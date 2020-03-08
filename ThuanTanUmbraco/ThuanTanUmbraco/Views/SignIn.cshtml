@@ -1,0 +1,53 @@
+﻿@using ThuanTanUmbraco.Models
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Master.cshtml";
+    var node = (IPublishedContent)CurrentPage;
+    var forgotPasswordPage = Model.Content.Site().FirstChild("memberInfo").FirstChild("forgotPassword");
+}
+@Html.Partial("~/Views/Partials/Layout/_BreadCrumb.cshtml")
+@if (Members.IsLoggedIn())
+{
+    <script type="text/javascript">
+        window.location = "@(CurrentPage.AncestorOrSelf(1).FirstChild("memberInfo") != null ? CurrentPage.AncestorOrSelf(1).FirstChild("memberInfo").Url : "/")";
+    </script>
+}
+else
+{
+    <div class="wrap-sign">
+        <div class="container">
+            <div class="title-product">
+                <h1>@node.Name</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="wrap-user__login">
+                        @using (Ajax.BeginForm("MemberLoginPage",
+                            "MemberFrontEnd",
+                            null,
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "signInPageAjax",
+                                HttpMethod = "POST",
+                                OnSuccess = "onSuccess",
+                                OnFailure = "onFailure"
+                            }, new { @class = "ajaxLoginForm" }))
+                        {
+                            <div id="signInPageAjax">
+                                @Html.Partial("~/Views/Partials/User/Login/LoginPage/_Form.cshtml", new LoginPageForm{ CultureLcid = System.Globalization.CultureInfo.CurrentUICulture.LCID })
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="submit" value="Đăng nhập" />
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="@(forgotPasswordPage != null ? forgotPasswordPage.Url : "#")">Quên mật khẩu?</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

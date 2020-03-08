@@ -1,0 +1,723 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="..\packages\UmbracoCms.7.12.2\build\UmbracoCms.props" Condition="Exists('..\packages\UmbracoCms.7.12.2\build\UmbracoCms.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A69B1EB0-C7B0-47A3-908D-00B3AD4A70E1}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ThuanTanUmbraco</RootNamespace>
+    <AssemblyName>ThuanTanUmbraco</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="businesslogic, Version=1.0.6820.12886, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\businesslogic.dll</HintPath>
+    </Reference>
+    <Reference Include="ClientDependency.Core, Version=1.9.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClientDependency.1.9.7\lib\net45\ClientDependency.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ClientDependency.Core.Mvc, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClientDependency-Mvc5.1.8.0.0\lib\net45\ClientDependency.Core.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="cms, Version=1.0.6820.12886, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\cms.dll</HintPath>
+    </Reference>
+    <Reference Include="controls, Version=1.0.6820.12887, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\controls.dll</HintPath>
+    </Reference>
+    <Reference Include="DotLiquid, Version=2.0.323.0, Culture=neutral, PublicKeyToken=82e46016ecf9f07c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotLiquid.2.0.323\lib\net45\DotLiquid.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Examine, Version=0.1.89.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Examine.0.1.89\lib\net45\Examine.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Core, Version=1.7.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Core.1.7.9\lib\net46\Hangfire.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.SqlServer, Version=1.7.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.SqlServer.1.7.9\lib\net45\Hangfire.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageProcessor, Version=2.5.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageProcessor.2.5.6\lib\net45\ImageProcessor.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageProcessor.Web, Version=4.8.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageProcessor.Web.4.8.7\lib\net45\ImageProcessor.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="interfaces, Version=1.0.6820.12874, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Log4Net.Async, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Log4Net.Async.2.0.4\lib\net40\Log4Net.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=2.9.4.1, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.2.9.4.1\lib\net40\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="MarkdownSharp, Version=1.14.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Markdown.1.14.7\lib\net45\MarkdownSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.Data, Version=1.0.1559.20655, Culture=neutral">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Common.1.0.0\lib\net45\Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.1.0.0\lib\net45\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=1.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.1.2.2\lib\net45\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniProfiler, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.2.1.0\lib\net40\MiniProfiler.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.12\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Semver, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\semver.1.1.2\lib\net451\Semver.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLCE4Umbraco, Version=1.0.6820.12887, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\SQLCE4Umbraco.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlServerCe.Entity, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\System.Data.SqlServerCe.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata, Version=1.0.21.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.Metadata.1.0.21\lib\portable-net45+win8\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Dataflow, Version=4.6.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Dataflow.4.7.0\lib\portable-net45+win8+wpa81\System.Threading.Tasks.Dataflow.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="TidyNet, Version=1.0.0.0, Culture=neutral">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\TidyNet.dll</HintPath>
+    </Reference>
+    <Reference Include="umbraco, Version=1.0.6820.12888, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\umbraco.dll</HintPath>
+    </Reference>
+    <Reference Include="Umbraco.Core, Version=1.0.6820.12881, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\Umbraco.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="umbraco.DataLayer, Version=1.0.6820.12886, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\umbraco.DataLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="umbraco.editorControls, Version=1.0.6820.12891, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\umbraco.editorControls.dll</HintPath>
+    </Reference>
+    <Reference Include="umbraco.MacroEngines, Version=1.0.6820.12892, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\umbraco.MacroEngines.dll</HintPath>
+    </Reference>
+    <Reference Include="Umbraco.ModelsBuilder, Version=3.0.10.102, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Umbraco.ModelsBuilder.3.0.10\lib\Umbraco.ModelsBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="umbraco.providers, Version=1.0.6820.12887, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\umbraco.providers.dll</HintPath>
+    </Reference>
+    <Reference Include="Umbraco.Web.UI, Version=1.0.6820.12892, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\Umbraco.Web.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UmbracoExamine, Version=0.7.0.12887, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Core.7.12.2\lib\net45\UmbracoExamine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.controller.js" />
+    <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.htm" />
+    <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.resource.js" />
+    <Content Include="App_Plugins\TinyMceTemplates\templates-config.html" />
+    <Content Include="config\grid.editors.config.js" />
+    <Content Include="config\Lang\cs-CZ.user.xml" />
+    <Content Include="config\Lang\da-DK.user.xml" />
+    <Content Include="config\Lang\de-DE.user.xml" />
+    <Content Include="config\Lang\en-GB.user.xml" />
+    <Content Include="config\Lang\en-US.user.xml" />
+    <Content Include="config\Lang\es-ES.user.xml" />
+    <Content Include="config\Lang\fr-FR.user.xml" />
+    <Content Include="config\Lang\he-IL.user.xml" />
+    <Content Include="config\Lang\it-IT.user.xml" />
+    <Content Include="config\Lang\ja-JP.user.xml" />
+    <Content Include="config\Lang\ko-KR.user.xml" />
+    <Content Include="config\Lang\nb-NO.user.xml" />
+    <Content Include="config\Lang\nl-NL.user.xml" />
+    <Content Include="config\Lang\pl-PL.user.xml" />
+    <Content Include="config\Lang\pt-BR.user.xml" />
+    <Content Include="config\Lang\ru-RU.user.xml" />
+    <Content Include="config\Lang\sv-SE.user.xml" />
+    <Content Include="config\Lang\zh-CN.user.xml" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cart\bootstrap.min.css" />
+    <Content Include="Content\cart\dataTables.bootstrap.min.css" />
+    <Content Include="Content\cart\dataTables.bootstrap.min.js" />
+    <Content Include="Content\cart\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\cart\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\cart\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\cart\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\cart\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\cart\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\cart\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\cart\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\cart\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\cart\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\cart\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\cart\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\cart\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\cart\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\cart\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\cart\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\cart\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\cart\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\cart\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\cart\jquery-ui-1.12.1.min.js" />
+    <Content Include="Content\cart\jquery-ui.min.css" />
+    <Content Include="Content\cart\jquery.dataTables.min.js" />
+    <Content Include="Content\cart\notify.min.js" />
+    <Content Include="Content\Site.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\custom-master.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\fonts.css" />
+    <Content Include="css\site.css" />
+    <Content Include="css\toastr.min.css" />
+    <Content Include="default.aspx" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Bold.svg" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Medium.svg" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Regular.svg" />
+    <Content Include="fonts\font-web\SFUEurostile\SFUEurostileBold.svg" />
+    <Content Include="fonts\font-web\SFUEurostile\SFUEurostileCondensed.svg" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonBold.svg" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonBook.svg" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonExtraBold.svg" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonOblique.svg" />
+    <Content Include="fonts\font-web\UTMAvo\UTMAvo.svg" />
+    <Content Include="fonts\font-web\UTMAvo\UTMAvoBold.svg" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntel-BoldItalic.svg" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntel-Italic.svg" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntel.svg" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntelBold.svg" />
+    <Content Include="fonts\font-web\UTMPenumbra\UTMPenumbra.svg" />
+    <Content Include="fonts\font-web\UTMPenumbra\UTMPenumbraBold.svg" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="images\about.png" />
+    <Content Include="images\ajax-loader.gif" />
+    <Content Include="images\arr.png" />
+    <Content Include="images\banner.png" />
+    <Content Include="images\banner1.png" />
+    <Content Include="images\bell.png" />
+    <Content Include="images\cart-empty.png" />
+    <Content Include="images\cart.png" />
+    <Content Include="images\en.png" />
+    <Content Include="images\ft-local.png" />
+    <Content Include="images\ft-mail.png" />
+    <Content Include="images\ft-phone.png" />
+    <Content Include="images\ft-web.png" />
+    <Content Include="images\ico.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\mysprite.sprite.css" />
+    <Content Include="images\mysprite.sprite.png" />
+    <Content Include="images\open.png" />
+    <Content Include="images\phone-2.png" />
+    <Content Include="images\play.png" />
+    <Content Include="images\scrolltop.png" />
+    <Content Include="images\search.png" />
+    <Content Include="images\sort_asc.png" />
+    <Content Include="images\sort_asc_disabled.png" />
+    <Content Include="images\sort_both.png" />
+    <Content Include="images\sort_desc.png" />
+    <Content Include="images\sort_desc_disabled.png" />
+    <Content Include="images\user.png" />
+    <Content Include="images\vi.png" />
+    <Content Include="images\w1.png" />
+    <Content Include="images\w2.png" />
+    <Content Include="libs\fancybox\css\jquery.fancybox.min.css" />
+    <Content Include="libs\fancybox\scripts\jquery.fancybox.min.js" />
+    <Content Include="libs\malihu\css\jquery.mCustomScrollbar.min.css" />
+    <Content Include="libs\malihu\scripts\jquery.mCustomScrollbar.min.js" />
+    <Content Include="libs\owl-carousel\css\owl.carousel.min.css" />
+    <Content Include="libs\owl-carousel\scripts\owl.carousel.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\cartController.js" />
+    <Content Include="Scripts\filterProductController.js" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.main.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.panel.mobile.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Templates\Emails\approved.html" />
+    <Content Include="Templates\Emails\notApproved.html" />
+    <Content Include="Templates\Emails\resetPassword.html" />
+    <Content Include="Templates\Emails\verifyRegister.html" />
+    <Content Include="Web.config" />
+    <Content Include="Views\Partials\CartApi\_CartApi.cshtml" />
+    <Content Include="Views\Partials\CartApi\_ViewCart.cshtml" />
+    <Content Include="Views\Partials\Cart\CartDetail\_Cart.cshtml" />
+    <Content Include="Views\Partials\Cart\_Cart.cshtml" />
+    <Content Include="Views\Partials\Cart\_CartEmpty.cshtml" />
+    <Content Include="Views\Partials\Cart\_CartItem.cshtml" />
+    <Content Include="Views\Partials\Checkout\Information\_information.cshtml" />
+    <Content Include="Views\Partials\Checkout\Product\_ItemInCart.cshtml" />
+    <Content Include="Views\Partials\Checkout\_checkout.cshtml" />
+    <Content Include="Views\Partials\Checkout\_Form.cshtml" />
+    <Content Include="Views\Partials\Contact\_Contact.cshtml" />
+    <Content Include="Views\Partials\Contact\_Form.cshtml" />
+    <Content Include="Views\Partials\Product\_aside.cshtml" />
+    <Content Include="Views\Partials\Product\_ImagesWithColor.cshtml" />
+    <Content Include="Views\Partials\Product\_ProductItems.cshtml" />
+    <Content Include="Views\Partials\User\ForgotPassword\_Form.cshtml" />
+    <Content Include="Views\Partials\User\Login\_Form.cshtml" />
+    <Content Include="Views\Partials\User\Login\_Login.cshtml" />
+    <Content Include="Views\Partials\User\SignUp\_form.cshtml" />
+    <Content Include="Views\Partials\User\_User.cshtml" />
+    <Content Include="Views\Partials\VerifySignUp\_Verify.cshtml" />
+    <Content Include="Views\Cart.cshtml" />
+    <Content Include="Views\CheckOut.cshtml" />
+    <Content Include="Views\Contact.cshtml" />
+    <Content Include="Views\ForgotPassword.cshtml" />
+    <Content Include="Views\ListProducts.cshtml" />
+    <Content Include="Views\MemberInfo.cshtml" />
+    <Content Include="Views\News.cshtml" />
+    <Content Include="Views\NewsItem.cshtml" />
+    <Content Include="Views\Policy.cshtml" />
+    <Content Include="Views\PolicyItem.cshtml" />
+    <Content Include="Views\Product.cshtml" />
+    <Content Include="Views\ProductCate.cshtml" />
+    <Content Include="Views\ProductItem.cshtml" />
+    <Content Include="Views\SignIn.cshtml" />
+    <Content Include="Views\SignUp.cshtml" />
+    <Content Include="Views\VerifySignUp.cshtml" />
+    <Content Include="Views\visitor.cshtml" />
+    <Content Include="Views\visitorItem.cshtml" />
+    <Content Include="Templates\Emails\docx\INVITATIONLETTER.docx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Code\OnSavingEventHandler.cs" />
+    <Content Include="App_Code\ShoppingCartApplication.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="App_Start\UmbracoAuthorizationFilter.cs" />
+    <Compile Include="BackgroundJobs\SendMail.cs" />
+    <Compile Include="ClassHelper\CryptoHelper.cs" />
+    <Compile Include="ClassHelper\UmbracoDisplay.cs" />
+    <Compile Include="ClassHelper\UmbracoEmail.cs" />
+    <Compile Include="ClassHelper\UmbracoHelper.cs" />
+    <Compile Include="ClassHelper\UmbracoRange.cs" />
+    <Compile Include="ClassHelper\UmbracoRegularExpression.cs" />
+    <Compile Include="ClassHelper\UmbracoRequired.cs" />
+    <Compile Include="ClassHelper\Utils.cs" />
+    <Compile Include="Controllers\CartBackendController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CheckOutController.cs" />
+    <Compile Include="Controllers\MemberFrontEndController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ShoppingCartTreeController.cs" />
+    <Compile Include="Controllers\SiteController.cs" />
+    <Compile Include="Controllers\VerifySignUpController.cs" />
+    <Compile Include="CustomGlobal.cs" />
+    <Compile Include="Mailer\EmailMessage.cs" />
+    <Compile Include="Mailer\EmailSenderException.cs" />
+    <Compile Include="Mailer\EmailSenderExtensions.cs" />
+    <Compile Include="Mailer\IEmailSender.cs" />
+    <Compile Include="Mailer\SmtpEmailSender.cs" />
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\CartBackendModel.cs" />
+    <Compile Include="Models\CartModel.cs" />
+    <Compile Include="Models\CheckOut.cs" />
+    <Compile Include="Models\ContactForm.cs" />
+    <Compile Include="Models\LoginForm.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductCartBackend.cs" />
+    <Compile Include="Models\ProductCartModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TemplateEngine\DotLiquidTemplate.cs" />
+    <Compile Include="TemplateEngine\ITextTemplate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config\imageprocessor\security.config" />
+    <Content Include="config\imageprocessor\processing.config" />
+    <Content Include="config\imageprocessor\cache.config" />
+    <Content Include="App_Plugins\ModelsBuilder\package.manifest" />
+    <Content Include="Media\Web.config" />
+    <Content Include="config\umbracoSettings.config" />
+    <Content Include="config\trees.config" />
+    <Content Include="config\tinyMceConfig.config" />
+    <Content Include="config\scripting.config" />
+    <Content Include="config\metablogConfig.config" />
+    <Content Include="config\log4net.config" />
+    <Content Include="config\HealthChecks.config" />
+    <Content Include="config\FileSystemProviders.config" />
+    <Content Include="config\feedProxy.config" />
+    <Content Include="config\ExamineSettings.config" />
+    <Content Include="config\ExamineIndex.config" />
+    <Content Include="config\EmbeddedMedia.config" />
+    <Content Include="config\Dashboard.config" />
+    <Content Include="config\ClientDependency.config" />
+    <Content Include="config\BaseRestExtensions.config" />
+    <Content Include="config\BackOfficeTours\getting-started.json" />
+    <Content Include="config\applications.config" />
+    <Content Include="config\404handlers.config" />
+    <Content Include="fonts\font-web\-2n2p-_Y08sg57CNWQfKNvesZW2xOQ-xsNqO47m55DA.woff2" />
+    <Content Include="fonts\font-web\-L14Jk06m6pUHB-5mXQQnRJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\0eC6fl06luXEYWpBSJvXCBJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\1hZf02POANh32k2VkgEoUBTbgVql8nDJpwnrE27mub0.woff2" />
+    <Content Include="fonts\font-web\3Y_xCyt7TNunMGg0Et2pnhJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\77FXFjRbGzN4aCrSFhlh3hJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\97uahxiqZRoncBaCEI3aWxJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\9_7S_tWeGDh5Pq3u05RVkhJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\cDKhRaXnQTOVbaoxwdOr9xTbgVql8nDJpwnrE27mub0.woff2" />
+    <Content Include="fonts\font-web\CWB0XYA8bzo0kSThX0UTuA.woff2" />
+    <Content Include="fonts\font-web\d-6IYplOFocCacKzxwXSOFtXRa8TVwTICgirnJhmVJw.woff2" />
+    <Content Include="fonts\font-web\ek4gzZ-GeXAPcSbHtCeQI_esZW2xOQ-xsNqO47m55DA.woff2" />
+    <Content Include="fonts\font-web\Fcx7Wwv8OzT71A3E1XOAjvesZW2xOQ-xsNqO47m55DA.woff2" />
+    <Content Include="fonts\font-web\Fl4y0QdOxyyTHEGMXX8kcRJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\Hgo13k-tfSpn0qi1SFdUfVtXRa8TVwTICgirnJhmVJw.woff2" />
+    <Content Include="fonts\font-web\I3S1wsgSg9YCurV6PUkTORJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\isZ-wbCXNKAbnjo6_TwHThJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\jSN2CGVDbcVyCnfJfjSdfBJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\jyIYROCkJM3gZ4KV00YXOBJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\K23cxWVTrIFD6DJsEVi07RTbgVql8nDJpwnrE27mub0.woff2" />
+    <Content Include="fonts\font-web\mbmhprMH69Zi6eEPBYVFhRJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\mErvLBYg_cXG3rLvUsKT_fesZW2xOQ-xsNqO47m55DA.woff2" />
+    <Content Include="fonts\font-web\mnpfi9pxYH-Go5UiibESIltXRa8TVwTICgirnJhmVJw.woff2" />
+    <Content Include="fonts\font-web\mx9Uck6uB63VIKFYnEMXrRJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\NdF9MtnOpLzo-noMoG0miPesZW2xOQ-xsNqO47m55DA.woff2" />
+    <Content Include="fonts\font-web\NYDWBdD4gIq26G5XYbHsFBJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\oHi30kwQWvpCWqAhzHcCSBJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\oOeFwZNlrTefzLYmlVV1UBJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\OpXUqTo0UgQQhGj_SFdLWBTbgVql8nDJpwnrE27mub0.woff2" />
+    <Content Include="fonts\font-web\phsu-QZXz1JBv0PbFoPmEBJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\Pru33qjShpZSmG3z6VYwnRJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\PwZc-YbIL414wB9rB1IAPRJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Bold.eot" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Bold.otf" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Bold.ttf" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Bold.woff" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Bold.woff2" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Medium.eot" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Medium.otf" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Medium.ttf" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Medium.woff" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Medium.woff2" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Regular.eot" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Regular.otf" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Regular.ttf" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Regular.woff" />
+    <Content Include="fonts\font-web\Quicksand\Quicksand-Regular.woff2" />
+    <Content Include="fonts\font-web\rGvHdJnr2l75qb0YND9NyBJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\RxZJdnzeo3R5zSexge8UUVtXRa8TVwTICgirnJhmVJw.woff2" />
+    <Content Include="fonts\font-web\s7gftie1JANC-QmDJvMWZhJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\SFUEurostile\sfueurostilebold.eot" />
+    <Content Include="fonts\font-web\SFUEurostile\SFUEurostileBold.otf" />
+    <Content Include="fonts\font-web\SFUEurostile\SFUEurostileBold.ttf" />
+    <Content Include="fonts\font-web\SFUEurostile\SFUEurostileBold.woff" />
+    <Content Include="fonts\font-web\SFUEurostile\sfueurostilecondensed.eot" />
+    <Content Include="fonts\font-web\SFUEurostile\SFUEurostileCondensed.otf" />
+    <Content Include="fonts\font-web\SFUEurostile\SFUEurostileCondensed.ttf" />
+    <Content Include="fonts\font-web\SFUEurostile\SFUEurostileCondensed.woff" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonBold.otf" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonBold.ttf" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonBold.TTF.eot" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonBold.woff" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonBook.otf" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonBook.ttf" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonBook.TTF.eot" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonBook.woff" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonExtraBold.otf" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonExtraBold.ttf" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonExtraBold.TTF.eot" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonExtraBold.woff" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonOblique.otf" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonOblique.ttf" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonOblique.TTF.eot" />
+    <Content Include="fonts\font-web\SFUShanon\SFUShannonOblique.woff" />
+    <Content Include="fonts\font-web\u0TOpm082MNkS5K0Q4rhqvesZW2xOQ-xsNqO47m55DA.woff2" />
+    <Content Include="fonts\font-web\UTMAvo\UTM Avo.eot" />
+    <Content Include="fonts\font-web\UTMAvo\UTM AvoBold.eot" />
+    <Content Include="fonts\font-web\UTMAvo\UTMAvo.otf" />
+    <Content Include="fonts\font-web\UTMAvo\UTMAvo.ttf" />
+    <Content Include="fonts\font-web\UTMAvo\UTMAvo.woff" />
+    <Content Include="fonts\font-web\UTMAvo\UTMAvoBold.otf" />
+    <Content Include="fonts\font-web\UTMAvo\UTMAvoBold.ttf" />
+    <Content Include="fonts\font-web\UTMAvo\UTMAvoBold.woff" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntel-BoldItalic.otf" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntel-BoldItalic.ttf" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntel-BoldItalic.woff" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntel-Italic.otf" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntel-Italic.ttf" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntel-Italic.woff" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntel.eot" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntel.otf" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntel.ttf" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntel.woff" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntelBold.eot" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntelBold.otf" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntelBold.ttf" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntelBold.woff" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntelBold_Italic.eot" />
+    <Content Include="fonts\font-web\UTMNeoSansIntel\UTMNeoSansIntel_Italic.eot" />
+    <Content Include="fonts\font-web\UTMPenumbra\UTMPenumbra.eot" />
+    <Content Include="fonts\font-web\UTMPenumbra\UTMPenumbra.otf" />
+    <Content Include="fonts\font-web\UTMPenumbra\UTMPenumbra.ttf" />
+    <Content Include="fonts\font-web\UTMPenumbra\UTMPenumbra.woff" />
+    <Content Include="fonts\font-web\UTMPenumbra\UTMPenumbraBold.eot" />
+    <Content Include="fonts\font-web\UTMPenumbra\UTMPenumbraBold.otf" />
+    <Content Include="fonts\font-web\UTMPenumbra\UTMPenumbraBold.ttf" />
+    <Content Include="fonts\font-web\UTMPenumbra\UTMPenumbraBold.woff" />
+    <Content Include="fonts\font-web\UX6i4JxQDm3fVTc1CPuwqhJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\vPcynSL0qHq_6dX7lKVByfesZW2xOQ-xsNqO47m55DA.woff2" />
+    <Content Include="fonts\font-web\vSzulfKSK0LLjjfeaxcREhTbgVql8nDJpwnrE27mub0.woff2" />
+    <Content Include="fonts\font-web\WeQRRE07FDkIrr29oHQgHBJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\font-web\WxrXJa0C3KdtC7lMafG4dRTbgVql8nDJpwnrE27mub0.woff2" />
+    <Content Include="fonts\font-web\ZLqKeelYbATG60EpZBSDyxJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontAwesome.rar" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="images\mysprite.sprite" />
+    <None Include="packages.config" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Rte.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Media.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Macro.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Embed.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Base.cshtml" />
+    <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
+    <Content Include="Views\Partials\Grid\Bootstrap3-Fluid.cshtml" />
+    <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
+    <Content Include="Views\Partials\Grid\Bootstrap2-Fluid.cshtml" />
+    <Content Include="Views\Home.cshtml" />
+    <Content Include="Views\Master.cshtml" />
+    <Content Include="Views\Partials\Layout\_Banner.cshtml" />
+    <Content Include="Views\Partials\Layout\_BreadCrumb.cshtml" />
+    <Content Include="Views\Partials\Layout\_Footer.cshtml" />
+    <Content Include="Views\Partials\Layout\_Header.cshtml" />
+    <Content Include="Views\Partials\Layout\_Share.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Partials\User\Login\LoginPage\_Form.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ThuanTan.Entity\ThuanTan.Entity.csproj">
+      <Project>{801062e2-658a-429a-955c-91f3121cc7bd}</Project>
+      <Name>ThuanTan.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50471</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50471/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\UmbracoCms.7.12.2\build\UmbracoCms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UmbracoCms.7.12.2\build\UmbracoCms.props'))" />
+    <Error Condition="!Exists('..\packages\UmbracoCms.7.12.2\build\UmbracoCms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UmbracoCms.7.12.2\build\UmbracoCms.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
+  <Import Project="..\packages\UmbracoCms.7.12.2\build\UmbracoCms.targets" Condition="Exists('..\packages\UmbracoCms.7.12.2\build\UmbracoCms.targets')" />
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
