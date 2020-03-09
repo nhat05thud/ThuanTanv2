@@ -21,7 +21,7 @@
         var query = "";
         var currentUrl = location.pathname;
         var colorParam = filter.getParameterByName("colors");
-        var colorValue = $(e).find(".master__color").val().replace(" ", "");
+        var colorValue = $(e).find(".master__color").val().replace(/ /g, "");
         if (colorParam != null) {
             var listColors = colorParam.split(",");
             if (actionId === 0) {

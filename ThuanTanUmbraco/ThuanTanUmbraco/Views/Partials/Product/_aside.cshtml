@@ -35,7 +35,8 @@
                             Key = color.GetPropertyValue<string>("color"),
                             Value = getColor.Value
                         };
-                        if (!listColors.Contains(colorProperties))
+                        var containsItem = listColors.Any(x => x.Key == colorProperties.Key);
+                        if (!containsItem)
                         {
                             listColors.Add(colorProperties);
                         }
