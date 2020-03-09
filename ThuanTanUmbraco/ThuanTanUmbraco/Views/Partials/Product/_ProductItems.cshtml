@@ -3,8 +3,29 @@
 @{
     var node = (IPublishedContent)CurrentPage;
     var paramColor = Request.Params["colors"];
+    var paramCapacity = Request.Params["capacity"];
     var items = new List<IPublishedContent>();
-    if (!string.IsNullOrEmpty(paramColor))
+    if (!string.IsNullOrEmpty(paramCapacity) && string.IsNullOrEmpty(paramColor))
+    {
+        var listCapacity = paramCapacity.Split(',');
+        int value;
+        var input = int.TryParse(listCapacity[0], out value);
+        var productItems = node.Children.ToList();
+        if (input)
+        {
+            productItems = productItems.Where(x => x.GetPropertyValue<int>("capacity") >= Convert.ToInt32(listCapacity[0])).ToList();
+            if (listCapacity.Length > 1 && !string.IsNullOrEmpty(listCapacity[1]))
+            {
+                var input1 = int.TryParse(listCapacity[1], out value);
+                if (input1)
+                {
+                    productItems = productItems.Where(x => x.GetPropertyValue<int>("capacity") <= Convert.ToInt32(listCapacity[1])).ToList();
+                }
+            }
+        }
+        items = productItems;
+    }
+    else if (!string.IsNullOrEmpty(paramColor) && string.IsNullOrEmpty(paramCapacity))
     {
         var listColors = paramColor.Split(',');
         var productItems = node.Children.ToList();
@@ -15,7 +36,42 @@
             {
                 foreach (var color in colorNested)
                 {
-                    if (listColors.Contains(color.GetPropertyValue<string>("color").Replace(" ","")) 
+                    if (listColors.Contains(color.GetPropertyValue<string>("color").Replace(" ", ""))
+                        && !items.Contains(item))
+                    {
+                        items.Add(item);
+                    }
+                }
+            }
+        }
+    }
+    else if (!string.IsNullOrEmpty(paramCapacity) && !string.IsNullOrEmpty(paramColor))
+    {
+        var listColors = paramColor.Split(',');
+        var listCapacity = paramCapacity.Split(',');
+        int value;
+        var input = int.TryParse(listCapacity[0], out value);
+        var productItems = node.Children.ToList();
+        if (input)
+        {
+            productItems = productItems.Where(x => x.GetPropertyValue<int>("capacity") >= Convert.ToInt32(listCapacity[0])).ToList();
+            if (!string.IsNullOrEmpty(listCapacity[1]))
+            {
+                var input1 = int.TryParse(listCapacity[1], out value);
+                if (input1)
+                {
+                    productItems = productItems.Where(x => x.GetPropertyValue<int>("capacity") <= Convert.ToInt32(listCapacity[1])).ToList();
+                }
+            }
+        }
+        foreach (var item in productItems)
+        {
+            var colorNested = item.GetPropertyValue<List<IPublishedContent>>("productColors");
+            if (colorNested != null)
+            {
+                foreach (var color in colorNested)
+                {
+                    if (listColors.Contains(color.GetPropertyValue<string>("color").Replace(" ", ""))
                         && !items.Contains(item))
                     {
                         items.Add(item);

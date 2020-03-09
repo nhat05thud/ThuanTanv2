@@ -44,7 +44,7 @@
     filterCapacity: function (value) {
         value = value.split("-").join(encodeURIComponent(","));
         var url = filter.renderUrl("capacity");
-        if (value !== 0) {
+        if (value !== "0") {
             window.location = url.url + url.presence + url.paramName + "=" + value;
         } else {
             window.location = url.url;
@@ -69,19 +69,21 @@
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     },
     removeURLParameter: function (key, sourceUrl) {
-        var list = [];
-        var url = sourceUrl.split("?")[0];
-        var query = sourceUrl.split("?")[1];
-        var listQuery = query.split("&");
-        for (var i = 0; i < listQuery.length; i++) {
-            var item = listQuery[i].split("=");
-            var obj = { key: item[0], value: item[1] };
-            list.push(obj);
+        var rtn = sourceUrl.split("?")[0],
+            param,
+            paramsArr = [],
+            queryString = (sourceUrl.indexOf("?") !== -1) ? sourceUrl.split("?")[1] : "";
+        if (queryString !== "") {
+            paramsArr = queryString.split("&");
+            for (var i = paramsArr.length - 1; i >= 0; i -= 1) {
+                param = paramsArr[i].split("=")[0];
+                if (param === key) {
+                    paramsArr.splice(i, 1);
+                }
+            }
+            rtn = rtn + "?" + paramsArr.join("&");
         }
-        list = $.grep(list, function (e) {
-            return e.key !== key;
-        });
-        return url + list.length > 0 ? "?" : "";
+        return rtn;
     }
 }
 filter.init();
