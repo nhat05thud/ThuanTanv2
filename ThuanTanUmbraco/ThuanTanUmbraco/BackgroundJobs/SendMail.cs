@@ -1,15 +1,11 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Configuration;
-using System.IO;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Hosting;
 using Hangfire;
 using ThuanTanUmbraco.ClassHelper;
 using ThuanTanUmbraco.Mailer;
 using ThuanTanUmbraco.TemplateEngine;
-using Umbraco.Core;
 
 namespace ThuanTanUmbraco.BackgroundJobs
 {
@@ -44,6 +40,14 @@ namespace ThuanTanUmbraco.BackgroundJobs
             newMessage.Body = _textTemplate.Render("verifyRegister", new { email, domainName, actionEndPoint, encrypData });
             await _emailSender.SendAsync(newMessage);
         }
+        public async Task SendMailContact(string title, string emailReceive, string name, string phone, string email, string message)
+        {
+            var newMessage = _emailSender.CreateNoReplyEmail();
+            newMessage.To = email;
+            newMessage.Subject = title;
+            newMessage.Body = _textTemplate.Render("emailContact", new { title, name, phone, email, message });
+            await _emailSender.SendAsync(newMessage);
+        }
         public static void EnqueueForgotPassword(string email, string title, string newPassword)
         {
             BackgroundJob.Enqueue<SendMail>(s => s.SendMailResetPassword(email, title, newPassword));
@@ -51,6 +55,10 @@ namespace ThuanTanUmbraco.BackgroundJobs
         public static void EnqueueRegister(string email, string title, string domainName, string verifyLink)
         {
             BackgroundJob.Enqueue<SendMail>(s => s.SendMailVerifyRegister(email, title, domainName, verifyLink));
+        }
+        public static void EnqueueContact(string title, string emailReceive, string name, string phone, string email, string message)
+        {
+            BackgroundJob.Enqueue<SendMail>(s => s.SendMailContact(title, emailReceive, name, phone, email, message));
         }
     }
 }

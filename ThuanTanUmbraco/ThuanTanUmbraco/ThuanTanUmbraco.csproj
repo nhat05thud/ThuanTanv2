@@ -401,6 +401,7 @@
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Templates\Emails\approved.html" />
     <Content Include="Templates\Emails\notApproved.html" />
+    <Content Include="Templates\Emails\emailContact.html" />
     <Content Include="Templates\Emails\resetPassword.html" />
     <Content Include="Templates\Emails\verifyRegister.html" />
     <Content Include="Web.config" />
