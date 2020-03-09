@@ -89,6 +89,29 @@ $(document).click(function (e) {
         $("#mobile-overlay").removeClass("menu-is--active");
     }
 }); 
+function playVideo(container, src, type) {
+    if (type === "youtubeLink") {
+        var iframe = '<div id="video--wrap"><iframe src="' + src + '" width="100%" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>';
+        container.html(iframe);
+    } else {
+        var video = '<video width="100%" controls><source src="' + src + '" type="video/mp4"/></video>';
+        container.html(video);
+    }
+}
+$(".product-carousel .item-video").click(function () {
+    var src = $(this).attr("data-href");
+    var type = $(this).attr("data-type");
+    var name = $(this).attr("data-name");
+    var container = $("#videoModal .modal-body");
+    $("#videoModal h5.modal-title").text(name);
+    playVideo(container, src, type);
+    $(this).parent().find(".item-video").removeClass("active");
+    $(this).addClass("active");
+    $("#videoModal").modal("show");
+});
+$("#videoModal").on("hidden.bs.modal", function (e) {
+    $("#videoModal .modal-body").html("");
+});
 function cartOpen(el) {
     $(el).click(function () {
         $(".header-right__form--cart .wrap-hidden").not($(this).next()).removeClass("active");
