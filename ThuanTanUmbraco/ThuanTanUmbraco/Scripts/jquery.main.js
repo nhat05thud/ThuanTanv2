@@ -127,6 +127,7 @@ function cartOpen(el) {
         }
     });
 }
+$("#select-capacity").on("change", function () { filter.filterCapacity($(this).val()); });
 function myfunload() {
     $(".panel-a").mobilepanel();
     $("#menu > li").not(".home").clone().appendTo($("#menuMobiles"));

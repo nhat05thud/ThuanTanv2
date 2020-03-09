@@ -18,32 +18,46 @@
         }
     },
     filterColorLocation: function (actionId, e) {
-        var query = "";
-        var currentUrl = location.pathname;
-        var colorParam = filter.getParameterByName("colors");
-        var colorValue = $(e).find(".master__color").val().replace(/ /g, "");
-        if (colorParam != null) {
-            var listColors = colorParam.split(",");
+        var listColors = [];
+        var url = filter.renderUrl("colors");
+        var value = $(e).find(".master__color").val().replace(/ /g, "");
+        if (url.param != null) {
+            listColors = url.param.split(",");
             if (actionId === 0) {
-                if (listColors.indexOf(colorValue) < 0) {
-                    listColors.push(colorValue);
+                if (listColors.indexOf(value) < 0) {
+                    listColors.push(value);
                 }
-                query = "?colors=" + listColors.join(encodeURIComponent(","));
             }
             else if (actionId === 1) {
-                if (listColors.indexOf(colorValue) >= 0) {
-                    listColors = $.grep(listColors, function (value) {
-                        return value !== colorValue;
+                if (listColors.indexOf(value) >= 0) {
+                    listColors = $.grep(listColors, function (e) {
+                        return e !== value;
                     });
                 }
-                query = listColors.length !== 0 ? "?colors=" + listColors.join(encodeURIComponent(",")) : "";
             }
         } else {
-            if (actionId === 0) {
-                query = "?colors=" + colorValue;
-            }
+            listColors.push(value);
         }
-        window.location = currentUrl + query;
+        var query = listColors.length !== 0 ? url.presence + url.paramName + "=" + listColors.join(encodeURIComponent(",")) : "";
+        window.location = url.url + query;
+    },
+    filterCapacity: function (value) {
+        value = value.split("-").join(encodeURIComponent(","));
+        var url = filter.renderUrl("capacity");
+        if (value !== 0) {
+            window.location = url.url + url.presence + url.paramName + "=" + value;
+        } else {
+            window.location = url.url;
+        }
+    },
+    renderUrl: function (paramName) {
+        var currentUrl = window.location.href;
+        var param = filter.getParameterByName(paramName, currentUrl);
+        if (param !== null) {
+            currentUrl = filter.removeURLParameter(paramName, currentUrl);
+        }
+        var presence = window.location.href.indexOf("?") >= 0 ? "&" : "?";
+        return { url: currentUrl, param: param, presence: presence, paramName: paramName }
     },
     getParameterByName: function (name, url) {
         if (!url) url = window.location.href;
@@ -53,6 +67,21 @@
         if (!results) return null;
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    },
+    removeURLParameter: function (key, sourceUrl) {
+        var list = [];
+        var url = sourceUrl.split("?")[0];
+        var query = sourceUrl.split("?")[1];
+        var listQuery = query.split("&");
+        for (var i = 0; i < listQuery.length; i++) {
+            var item = listQuery[i].split("=");
+            var obj = { key: item[0], value: item[1] };
+            list.push(obj);
+        }
+        list = $.grep(list, function (e) {
+            return e.key !== key;
+        });
+        return url + list.length > 0 ? "?" : "";
     }
 }
 filter.init();
