@@ -53,6 +53,7 @@ $(".product-colors .item").click(function () {
 });
 $("#add-to-cart").off("click").on("click", function () { cart.addToCart(this); });
 $("#buy-now").off("click").on("click", function () { cart.buy(this); });
+$(".cart-body__item--name > span.del-product").click(function () { cart.deleteCartItem(this, $(this).data("id"), $(this).data("color")); });
 $(document).on("click", ".remove-item", function () { cart.deleteCartItem(this, $(this).data("id"), $(this).data("color")); });
 $(".cart-header button#delete-all-cart").click(function () { cart.deleteAllCart(); });
 $(".cart-body__item--quantity input[type='number']").focusout(function () {

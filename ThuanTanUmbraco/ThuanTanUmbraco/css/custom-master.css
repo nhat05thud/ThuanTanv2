@@ -877,6 +877,7 @@
         display: inline-block;
         vertical-align: middle;
         position: relative;
+        border: 1px solid #ddd;
     }
 .wrap-main__aside.filter--product .item ul.color li:hover {
         text-decoration: underline;
@@ -1774,7 +1775,14 @@ div.copyright a {
 }
 
     .cart-body__item--name > a:hover {
-        color: red;
+        color: #d42333;
+    }
+.cart-body__item--name > span.del-product {
+    color: #d42333;
+    cursor: pointer;
+}
+    .cart-body__item--name > span.del-product:hover {
+        text-decoration: underline;
     }
 
 .cart-body__item--price {
