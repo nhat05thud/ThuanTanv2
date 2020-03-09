@@ -60,18 +60,18 @@ namespace ThuanTanUmbraco.Controllers
             return Json(new {link = url }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult UpdateTotalPrice(int id, int quantity)
+        public ActionResult UpdateTotalPrice(int id, int quantity, string color)
         {
             var total = 0;
             if (Session["Cart"] != null)
             {
                 var listCart = (List<CartItem>)Session["Cart"];
-                var item = listCart.SingleOrDefault(x => x.Id == id);
+                var item = listCart.FirstOrDefault(x => x.Id == id && x.Color.Trim().Replace(" ", "") == color.Trim().Replace(" ", ""));
                 if (item != null)
                 {
-                    item.Quantity = quantity > 0 ? quantity : item.Quantity += 1;
+                    item.Quantity = quantity != item.Quantity || quantity > 0 ? quantity : item.Quantity += 1;
                 }
-                total = listCart.Sum(x => (x.Price * x.Quantity));
+                total = listCart.Sum(x => (x.Price > 0 ? x.Price * x.Quantity : 0));
                 Session["Cart"] = listCart;
             }
             return Json(new { total = total }, JsonRequestBehavior.AllowGet);
@@ -89,7 +89,7 @@ namespace ThuanTanUmbraco.Controllers
             if (Session["Cart"] != null)
             {
                 var listCart = (List<CartItem>)Session["Cart"];
-                var item = listCart.SingleOrDefault(x => x.Id == id && x.Color.Trim().Replace(" ", "") == color.Trim().Replace(" ", ""));
+                var item = listCart.FirstOrDefault(x => x.Id == id && x.Color.Trim().Replace(" ", "") == color.Trim().Replace(" ", ""));
                 if (item != null)
                 {
                     itemPrice = item.Price * item.Quantity;

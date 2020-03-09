@@ -15,12 +15,14 @@
     <div class="cart-body">
         @foreach (var item in Model)
         {
-            <div class="item">
+            <div class="item product__cart--item" data-id="@(item.Id)_@(item.Color.Replace(" ", ""))">
                 <div class="cart-body__item--image">
                     <img src="@item.Image" alt="@item.Name" />
                 </div>
                 <div class="cart-body__item--name">
-                    <a href="@item.Url">@item.Name</a>
+                    <a href="@item.Url">@item.Name</a> <br />
+                    <p><b>Màu:</b> <span class="cart__item--color">@item.Color.Trim()</span></p>
+                    <span class="del-product" data-id="@item.Id" data-color="@item.Color"><i class="fa fa-trash-o"></i> Xoá sản phẩm</span>
                 </div>
                 <div class="cart-body__item--price">
                     <span>@(string.Format("{0:#,0}", item.Price))</span> VND
@@ -37,7 +39,7 @@
         <ul>
             <li>
                 <div class="label">Tổng tiền:</div>
-                <div class="currency"><span>@(string.Format("{0:#,0}", Model.Sum(x => x.Price * x.Quantity)))</span> VND</div>
+                <div class="currency"><span class="product__cart--item--total">@(string.Format("{0:#,0}", Model.Sum(x => x.Price * x.Quantity)))</span> VND</div>
             </li>
         </ul>
         <div class="clr"></div>

@@ -25,7 +25,7 @@
     <div class="items-in-cart">
         @foreach (var item in Model)
         {
-            <div class="item">
+            <div class="item product__cart--item" data-id="@(item.Id)_@(item.Color.Replace(" ", ""))">
                 <div class="img">
                     <a href="@item.Url">
                         <img class="item-image" src="@item.Image" alt="@item.Name" />
