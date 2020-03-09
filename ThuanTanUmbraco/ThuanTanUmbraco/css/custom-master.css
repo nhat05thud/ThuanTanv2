@@ -1358,6 +1358,15 @@ div.copyright a {
             font-size: 24px;
             font-weight: bold;
         }
+    .shop-info .zalo-wrap {
+        background: url("/images/zalo-ico.png") no-repeat left 20px;
+        padding: 8px 0 8px 120px;
+    }
+
+        .shop-info .zalo-wrap p {
+            font-size: 24px;
+            font-weight: bold;
+        }
 
     .shop-info .shop-newsletter {
         background: url("/images/bell.png") no-repeat left center;
