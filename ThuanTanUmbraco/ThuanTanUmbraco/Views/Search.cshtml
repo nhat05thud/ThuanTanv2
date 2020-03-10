@@ -1,0 +1,89 @@
+﻿@using Umbraco.Web.Models
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Master.cshtml";
+}
+
+<div class="container">
+    <div class="wrap-main__product">
+        <h1 class="main-title">Tìm kiếm</h1>
+        @{
+            var searchQuery = Request.QueryString["keyword"];
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                var results = (IEnumerable<IPublishedContent>)Umbraco.Search(searchQuery);
+                results = results.Where(x => x.DocumentTypeAlias == "productItem");
+                results = results.Where(x => x.Name.ToLower().Contains(searchQuery.ToLower()) || searchQuery.ToLower().Contains(x.Name.ToLower()));
+                <p>Kết quả tìm kiếm cho từ khóa: <strong>@searchQuery</strong></p><br/>
+                if (results.Any())
+                {
+                    <div class="row">
+                        @foreach (var item in results)
+                        {
+                            var colorNested = item.GetPropertyValue<IEnumerable<IPublishedContent>>("productColors");
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                                <div class="item__grid--2">
+                                    <div class="img">
+                                        <a href="@item.Url">
+                                            @if (colorNested != null && colorNested.Any())
+                                            {
+                                                var itemColor = colorNested.First();
+                                                var thumb = Umbraco.TypedMedia(itemColor.GetPropertyValue<int>("image"));
+                                                <img class="item-image" src="@(thumb != null ? thumb.GetCropUrl(270, 240, imageCropMode: ImageCropMode.BoxPad, furtherOptions: "&bgcolor=fff&slimmage=true") : "https://via.placeholder.com/270x240")" alt="@item.Name" />
+                                            }
+                                            else
+                                            {
+                                                <img class="item-image" src="https://via.placeholder.com/270x240" alt="@item.Name" />
+                                                <b>1</b>
+                                            }
+                                            @if (item.GetPropertyValue<double>("promotion") > 0)
+                                            {
+                                                <p class="percent">-@(item.GetPropertyValue<double>("promotion"))%</p>
+                                            }
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <a class="item-title" data-id="@item.Id" href="@item.Url">@item.Name</a>
+                                        <div class="desc">
+                                            @item.GetPropertyValue("description")
+                                        </div>
+                                        <p class="price">
+                                            @if (item.GetPropertyValue<int>("price") > 0)
+                                            {
+                                                if (item.GetPropertyValue<double>("promotion") > 0)
+                                                {
+                                                    <span class="current-price">
+                                                        <span>@(string.Format("{0:#,0}", Math.Round(item.GetPropertyValue<double>("price") * (100 - item.GetPropertyValue<double>("promotion")) / 100, MidpointRounding.AwayFromZero)))</span> <text>VND</text>
+                                                    </span>
+                                                    <span>
+                                                        <span>
+                                                            @(string.Format("{0:#,0}", item.GetPropertyValue("price")))
+                                                        </span> VND
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="current-price">
+                                                        <span>
+                                                            @(string.Format("{0:#,0}", item.GetPropertyValue("price")))
+                                                        </span> <text>VND</text>
+                                                    </span>
+                                                }
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center" style="padding: 30px 0;">
+                        <i>Không có sản phẩm nào trùng khớp với từ khóa</i>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>

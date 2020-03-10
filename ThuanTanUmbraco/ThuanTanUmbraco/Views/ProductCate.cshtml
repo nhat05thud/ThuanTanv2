@@ -17,7 +17,7 @@
             @foreach (var item in node.Children)
             {
                 var thumb = Umbraco.TypedMedia(item.GetPropertyValue<int>("image"));
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                     <div class="item__grid--1">
                         <a href="@item.Url">
                             <img src="@(thumb != null ? thumb.GetCropUrl(370, 330, furtherOptions: "&slimmage=true") : "https://via.placeholder.com/370x330")" alt="" />

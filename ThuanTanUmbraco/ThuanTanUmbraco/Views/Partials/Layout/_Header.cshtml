@@ -1,11 +1,29 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@using ThuanTanUmbraco.ClassHelper
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     var home = CurrentPage.AncestorOrSelf(1);
     var logo = Umbraco.TypedMedia(home.GetPropertyValue<int>("logo"));
+    var memberInfo = Model.Content.Site().FirstChild("memberInfo");
+    var cart = Model.Content.Site().FirstChild("cart");
+    var product = Model.Content.Site().FirstChild("product");
 }
 <div id="header">
     <div class="container">
         <div class="header-wrap">
+            <div class="hidden__top-header ipadmo-992">
+                <div class="container">
+                    <div class="text-right">
+                        @if (memberInfo != null)
+                        {
+                            var signUp = memberInfo.FirstChild("signUp");
+                            var signIn = memberInfo.FirstChild("signIn");
+                            <a href="@(signIn != null ? signIn.Url : "#")">Đăng nhập</a><text> | </text>
+                            <a href="@(signUp != null ? signUp.Url : "#")">Đăng ký</a><text> | </text>
+                        }
+                        <a href="@(cart != null ? cart.Url : "#")">Giỏ hàng (<span class="cart-quantity">0</span>)</a>
+                    </div>
+                </div>
+            </div>
             <div class="header-logo d-inline-b ver-top pd-l-r-15">
                 <a href="@home.Url">
                     <img alt="" src="@(logo != null ? logo.Url : "/images/logo.png")">
@@ -18,10 +36,10 @@
                             <li @(CurrentPage.Id == home.Id ? "class=active" : null)><a href="@home.Url">Trang chủ</a></li>
                             @foreach (var childPage in home.Children())
                             {
-                                var page = (IPublishedContent)childPage;
-                                if (page.DocumentTypeAlias == "product" 
-                                    || page.DocumentTypeAlias == "news" 
-                                    || page.DocumentTypeAlias == "policy" 
+                                var page = (IPublishedContent) childPage;
+                                if (page.DocumentTypeAlias == "product"
+                                    || page.DocumentTypeAlias == "news"
+                                    || page.DocumentTypeAlias == "policy"
                                     || page.DocumentTypeAlias == "contact")
                                 {
                                     if (page.DocumentTypeAlias == "product")
@@ -59,14 +77,16 @@
                             }
                         </ul>
                         <a class="panel-a menu-mo ipadmo-992" href="#menumobile" data-position="true" data-type="false">
-                            <span class="fa fa-reorder"></span>Menu
+                            <span class="fa fa-reorder"></span>
                         </a>
                     </div>
-                    <div class="header-right__form d-inline-b ver-top pd-l-r-15">
+                    <div class="header-right__form d-inline-b ver-top pd-l-r-15 desktop-992">
                         <div class="header-right__form--search d-inline-b ver-top pd-l-r-15">
                             <div class="search-form">
-                                <input type="text" value="" placeholder="Tìm kiếm" />
-                                <input type="submit" value="" />
+                                <form action="/Search" method="get">
+                                    <input type="text" name="keyword" value="" placeholder="Tìm kiếm" />
+                                    <input type="submit" value="" />
+                                </form>
                             </div>
                         </div>
                         <div class="header-right__form--cart d-inline-b ver-top pd-l-r-15">

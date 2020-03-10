@@ -152,6 +152,7 @@
                     quantity += parseInt(list[i].quantity);
                 }
                 $(".cart-form .item-visible > span").text(quantity);
+                $(".hidden__top-header span.cart-quantity").text(quantity);
             }
         });
     },
@@ -186,6 +187,7 @@
             quantity += parseInt($(e).find(".item-quantity").text());
         });
         $(".cart-form .item-visible > span").text(quantity);
+        $(".hidden__top-header span.cart-quantity").text(quantity);
     },
     updateTotalPrice: function (e, quantity) {
         var color = $(e).parents(".item").find(".cart__item--color").text();

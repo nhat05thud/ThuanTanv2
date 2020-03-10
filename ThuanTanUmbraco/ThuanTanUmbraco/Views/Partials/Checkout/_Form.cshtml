@@ -5,16 +5,16 @@
 @if (Model.IsSuccess)
 {
     <div class="notification-wrapper" style="margin-bottom: 30px;">
-        <p>Bạn đã đặt hàng thành công! Quản trị viên sẽ liên hệ với bạn để xác nhận trong thời gian sớm nha. Cảm ơn bạn đã đặt hàng!!</p>
+        <p>Bạn đã đặt hàng thành công! Quản trị viên sẽ liên hệ với bạn để xác nhận trong thời gian sớm nhất. Cảm ơn bạn đã đặt hàng!!</p>
     </div>
 }
 else
 {
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-lg-8 col-md-12 col-sm-12 col-12">
             @Html.Partial("~/Views/Partials/Checkout/Information/_information.cshtml", Model)
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12">
             <div class="check-out__group">
                 <h1>Giỏ hàng</h1>
                 <div class="check-out__group--content">

@@ -191,34 +191,34 @@
         padding: 0 10px;
     }
 
-    .header-right__form--search .search-form {
+.search-form {
+    width: 100%;
+    position: relative;
+}
+
+    .search-form input[type="text"] {
         width: 100%;
-        position: relative;
+        height: 30px;
+        font-size: 14px;
+        line-height: 30px;
+        padding: 0 30px 0 10px;
+        border: 0;
+        background: #efefef;
+        border-radius: 5px;
     }
 
-        .header-right__form--search .search-form input[type="text"] {
-            width: 100%;
-            height: 30px;
-            font-size: 14px;
-            line-height: 30px;
-            padding: 0 30px 0 10px;
-            border: 0;
-            background: #efefef;
-            border-radius: 5px;
-        }
-
-        .header-right__form--search .search-form input[type="submit"] {
-            border: 0;
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background: url("/images/mysprite.sprite.png");
-            background-position: -10px -130px;
-            top: 0;
-            bottom: 0;
-            right: 7px;
-            margin: auto;
-        }
+    .search-form input[type="submit"] {
+        border: 0;
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background: url("/images/mysprite.sprite.png");
+        background-position: -10px -130px;
+        top: 0;
+        bottom: 0;
+        right: 7px;
+        margin: auto;
+    }
 
 .header-right__form--cart {
     width: calc(100% - 300px);
@@ -857,44 +857,51 @@
     font-weight: bold;
     font-size: 16px;
 }
+
 .wrap-main__aside.filter--product .item {
     padding: 15px;
 }
-.wrap-main__aside.filter--product .item > h5 {
-    font-weight: bold;
-    margin: 0 0 5px;
-}
-.wrap-main__aside.filter--product .item ul.color li {
-    padding: 5px 0;
-    cursor: pointer;
-}
-    .wrap-main__aside.filter--product .item ul.color li span {
-        width: 25px;
-        height: 25px;
-        -ms-border-radius: 50%;
-        border-radius: 50%;
-        margin-right: 10px;
-        display: inline-block;
-        vertical-align: middle;
-        position: relative;
-        border: 1px solid #ddd;
+
+    .wrap-main__aside.filter--product .item > h5 {
+        font-weight: bold;
+        margin: 0 0 5px;
     }
-.wrap-main__aside.filter--product .item ul.color li:hover {
-        text-decoration: underline;
+
+    .wrap-main__aside.filter--product .item ul.color li {
+        padding: 5px 0;
+        cursor: pointer;
     }
-    .wrap-main__aside.filter--product .item ul.color li.active span:before {
-        position: absolute;
-        content: "\f00c";
-        font-family: 'FontAwesome';
-        background: rgba(0, 0, 0, 0.2);
-        color: #fff;
-        width: 23px;
-        line-height: 23px;
-        text-align: center;
-        font-size: 10px;
-        -ms-border-radius: 50%;
-        border-radius: 50%;
-    }
+
+        .wrap-main__aside.filter--product .item ul.color li span {
+            width: 25px;
+            height: 25px;
+            -ms-border-radius: 50%;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            border: 1px solid #ddd;
+        }
+
+        .wrap-main__aside.filter--product .item ul.color li:hover {
+            text-decoration: underline;
+        }
+
+        .wrap-main__aside.filter--product .item ul.color li.active span:before {
+            position: absolute;
+            content: "\f00c";
+            font-family: 'FontAwesome';
+            background: rgba(0, 0, 0, 0.2);
+            color: #fff;
+            width: 23px;
+            line-height: 23px;
+            text-align: center;
+            font-size: 10px;
+            -ms-border-radius: 50%;
+            border-radius: 50%;
+        }
+
     .wrap-main__aside.filter--product .item select {
         margin: 10px 0;
         display: block;
@@ -909,27 +916,32 @@
         border: 1px solid #ced4da;
         border-radius: 2px;
     }
-    /**/
-    #videoModal .modal-header {
-        background: #363636;
-    }
+/**/
+#videoModal .modal-header {
+    background: #363636;
+}
+
     #videoModal .modal-header .modal-title {
         color: #fff;
         text-transform: uppercase;
         font-weight: bold;
     }
+
     #videoModal .modal-header .close {
         color: #fff;
     }
+
 #videoModal .modal-content {
     border-radius: 6px;
 }
+
 #video--wrap {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 */
     padding-top: 25px;
     height: 0;
 }
+
     #video--wrap iframe {
         position: absolute;
         top: 0;
@@ -1400,6 +1412,7 @@ div.copyright a {
             font-size: 24px;
             font-weight: bold;
         }
+
     .shop-info .zalo-wrap {
         background: url("/images/zalo-ico.png") no-repeat left 20px;
         padding: 8px 0 8px 120px;
@@ -1791,10 +1804,12 @@ div.copyright a {
     .cart-body__item--name > a:hover {
         color: #d42333;
     }
+
 .cart-body__item--name > span.del-product {
     color: #d42333;
     cursor: pointer;
 }
+
     .cart-body__item--name > span.del-product:hover {
         text-decoration: underline;
     }
@@ -1896,7 +1911,40 @@ div.copyright a {
     min-height: 150px;
 }
 
+.hidden__top-header {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+    .hidden__top-header a {
+        color: #333;
+    }
+
 @media screen and (max-width: 1199px) {
+    .header-right__menu {
+        width: calc(100% - 350px);
+    }
+
+        .header-right__menu #menu > li > a {
+            padding: 5px 7px;
+        }
+
+    .header-right__form {
+        width: 350px;
+    }
+
+    .header-right__form--search {
+        width: 240px;
+    }
+
+    .header-right__form--cart {
+        width: calc(100% - 210px);
+    }
+
+    #header .nav-main__sub .submenu__holder .category-item > a {
+        font-size: 14px;
+    }
+
     .shop-info .shop-newsletter {
         padding: 12px 0 12px 75px;
     }
@@ -1905,35 +1953,114 @@ div.copyright a {
             font-size: 10px;
         }
 
-    .shop-info .shop-time {
-        padding-top: 30px;
+    .shop-info .shop-time p,
+    .shop-info .shop-hotline p,
+    .shop-info .zalo-wrap p {
+        font-size: 16px;
     }
 
-        .shop-info .shop-time p {
-            font-size: 14px;
+        .shop-info .shop-time p span {
+            font-size: 11px;
         }
 
-            .shop-info .shop-time p span {
-                font-size: 11px;
-            }
+    .shop-info .zalo-wrap {
+        padding: 13px 0 12px 120px;
+    }
 }
 
 @media (max-width: 992px) {
+    .header-wrap {
+        padding: 5px 0 7px;
+    }
+
+    .header-right__menu {
+        width: 100%;
+    }
+    /**/
     .shop-info .col-lg-4 {
         border: 0;
     }
 
     .shop-info .shop-hotline {
         background: url(/images/phone-2.png) no-repeat 15px center;
-        padding: 8px 0 8px 100px;
+        padding: 8px 0 8px 120px;
     }
 
-    .shop-info .shop-time p {
-        font-size: 24px;
+    .shop-info .shop-time {
+        padding: 10px 0 10px 120px;
     }
 
-    .shop-info .shop-newsletter {
-        background: url(/images/bell.png) no-repeat 10px center;
-        padding: 12px 0 12px 100px;
+        .shop-info .shop-time p,
+        .shop-info .shop-hotline p,
+        .shop-info .zalo-wrap p {
+            font-size: 24px;
+        }
+
+    .wrap-product-detail .left {
+        display: block;
+        max-width: 100%;
+        margin: 0 auto 30px;
+    }
+
+    .wrap-product-detail .right {
+        width: 100%;
+    }
+
+    .cart-body__item--name {
+        width: calc(100% - 145px);
+    }
+
+    .cart-body__item--price {
+        text-align: center;
+        width: 50%;
+    }
+
+    .cart-body__item--quantity {
+        width: 50%;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .main-banner .banner-content {
+        position: static;
+    }
+
+    .main-banner .banner-content__wrap {
+        width: 100%;
+    }
+
+    .default-about {
+        padding-bottom: 15px;
+    }
+
+        .default-about .col-md-4 {
+            text-align: center;
+        }
+
+            .default-about .col-md-4 img {
+                max-width: 100%;
+                margin-bottom: 15px;
+            }
+
+    #footer .col-md-7 {
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .shop-info .shop-time p,
+    .shop-info .shop-hotline p,
+    .shop-info .zalo-wrap p {
+        font-size: 16px;
+    }
+
+    .cart-header button, #payment {
+        font-size: 12px;
+        padding: 0 10px;
+    }
+
+    .form-item label, .form-item .input-wrapper {
+        width: 100%;
     }
 }

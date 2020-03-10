@@ -173,12 +173,15 @@ function myfunload() {
         autoplayHoverPause: true,
         responsive: {
             0: {
-                items: 2
+                items: 1
             },
             480: {
+                items: 2
+            },
+            767: {
                 items: 3
             },
-            860: {
+            992: {
                 items: 4
             },
             1200: {
