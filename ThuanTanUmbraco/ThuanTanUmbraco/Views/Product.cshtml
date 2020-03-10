@@ -1,7 +1,28 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
-	Layout = "Master.cshtml";
+    Layout = "Master.cshtml";
+    var home = CurrentPage.AncestorOrSelf(1);
+    var paramType = Request.Params["type"];
 }
-
-@* the fun starts here *@
-
+@if (paramType != null)
+{
+    @Html.Partial("~/Views/Partials/Layout/_BreadCrumb.cshtml")
+    <div class="wrap-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-12">
+                    @Html.Partial("~/Views/Partials/Product/_aside.cshtml")
+                </div>
+                <div class="col-lg-9 col-12">
+                    @Html.Partial("~/Views/Partials/Product/_ProductItems.cshtml")
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <script type="text/javascript">
+        window.location = "@home.Url"
+    </script>
+}

@@ -61,7 +61,8 @@
                                                                 </ul>
                                                             </li>
                                                         }
-                                                        @*<li class="category-item col-md-3"><a href="#">Sản phẩm khuyến mãi <i class="fa fa-angle-right"></i></a></li>*@
+                                                        <li class="category-item col-md-3"><a href="@(product != null ? product.Url + "?type=" + Utils.TypeNewProduct : "#")">Sản phẩm mới <i class="fa fa-angle-right"></i></a></li>
+                                                        <li class="category-item col-md-3"><a href="@(product != null ? product.Url + "?type=" + Utils.TypePromoProduct : "#")">Sản phẩm khuyến mãi <i class="fa fa-angle-right"></i></a></li>
                                                     </ul>
                                                 </li>
                                             </ul>

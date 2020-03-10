@@ -1,25 +1,52 @@
-﻿@using ThuanTanUmbraco.Models
+﻿@using System.Xml.Linq
+@using ThuanTanUmbraco.ClassHelper
+@using ThuanTanUmbraco.Models
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
-    var node = (IPublishedContent)CurrentPage;
+    var current = (IPublishedContent)CurrentPage;
+    var paramType = Request.Params["type"];
+    var node = new List<IPublishedContent>();
+    if (paramType != null)
+    {
+        if (paramType == Utils.TypeNewProduct)
+        {
+            node = Model.Content.Site().FirstChild("product")
+                .Descendants("productItem")
+                .Where(x => x.CreateDate.Date <= DateTime.Now.Date && x.CreateDate >= DateTime.Now.AddDays(-7).Date)
+                .OrderByDescending(x => x.CreateDate).ToList();
+        }
+        else if (paramType == Utils.TypePromoProduct)
+        {
+            node = Model.Content.Site().FirstChild("product")
+                .Descendants("productItem")
+                .Where(x => x.GetPropertyValue<int>("promotion") > 0).ToList();
+        }
+    }
+    else
+    {
+        node = current.Descendants("productItem").ToList();
+    }
 }
-<div class="wrap-main__aside">
-    <img src="/images/ico.png" alt="" />
-    <div class="item">
-        <a href="@node.Parent.Url">@node.Parent.Name</a>
-        <ul class="ul__product--item">
-            @foreach (var item in node.Parent.Children)
-            {
-                <li @(item.Id == CurrentPage.Id ? "class=active" : null)><a href="@item.Url">@item.Name</a></li>
-            }
-        </ul>
+@if (paramType == null)
+{
+    <div class="wrap-main__aside">
+        <img src="/images/ico.png" alt="" />
+        <div class="item">
+            <a href="@current.Parent.Url">@current.Parent.Name</a>
+            <ul class="ul__product--item">
+                @foreach (var item in current.Parent.Children)
+                {
+                    <li @(item.Id == CurrentPage.Id ? "class=active" : null)><a href="@item.Url">@item.Name</a></li>
+                }
+            </ul>
+        </div>
     </div>
-</div>
+}
 <div class="wrap-main__aside filter--product">
     <h1>Lọc sản phẩm</h1>
     @{
         var listColors = new List<ProductColor>();
-        var items = node.Descendants("productItem");
+        var items = node;
         foreach (var item in items)
         {
             var colorNested = item.GetPropertyValue<List<IPublishedContent>>("productColors");

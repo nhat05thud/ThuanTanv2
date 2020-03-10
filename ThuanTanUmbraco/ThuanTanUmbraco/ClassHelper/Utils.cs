@@ -7,6 +7,8 @@ namespace ThuanTanUmbraco.ClassHelper
 {
     public static class Utils
     {
+        public static readonly string TypeNewProduct = "newProduct";
+        public static readonly string TypePromoProduct = "promoProduct";
         public static string ConvertImageToBase64(string imagePath)
         {
             using (Image image = Image.FromFile(HttpContext.Current.Server.MapPath("~" + imagePath)))
