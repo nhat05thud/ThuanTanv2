@@ -18,7 +18,9 @@
                 var thumb = Umbraco.TypedMedia(item.GetPropertyValue<int>("image"));
                 var listImages = (List<IPublishedContent>)item.GetPropertyValue<IEnumerable<IPublishedContent>>("moreImage");
                 <div class="main-image">
-                    <img src="@(thumb != null ? thumb.GetCropUrl(550, 550, imageCropMode: ImageCropMode.BoxPad, furtherOptions: "&bgcolor=fff&slimmage=true") : "https://via.placeholder.com/550x550")" alt="@node.Name" />
+                    <a data-fancybox="gallery" href="@(thumb != null ? thumb.Url : "https://via.placeholder.com/550x550")">
+                        <img src="@(thumb != null ? thumb.GetCropUrl(550, 550, imageCropMode: ImageCropMode.BoxPad, furtherOptions: "&bgcolor=fff&slimmage=true") : "https://via.placeholder.com/550x550")" alt="@node.Name" />
+                    </a>
                 </div>
                 if (listImages != null)
                 {
@@ -26,7 +28,9 @@
                         @foreach (var img in listImages)
                         {
                             <div class="item">
-                                <img src="@img.GetCropUrl(90, 90, imageCropMode: ImageCropMode.BoxPad, furtherOptions: "&bgcolor=fff&slimmage=true")" alt="@node.Name" />
+                                <a data-fancybox="gallery" href="@img.Url">
+                                    <img src="@img.GetCropUrl(90, 90, imageCropMode: ImageCropMode.BoxPad, furtherOptions: "&bgcolor=fff&slimmage=true")" alt="@node.Name" />
+                                </a>
                             </div>
                         }
                     </div>

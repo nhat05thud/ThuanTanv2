@@ -15,6 +15,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="App_Browsers/w3cvalidator.browser">
       <publishTime>03/09/2020 09:16:10</publishTime>
     </File>
+    <File Include="App_Code/Bootstrapper.cs">
+      <publishTime>03/18/2020 14:14:42</publishTime>
+    </File>
     <File Include="App_Code/OnSavingEventHandler.cs">
       <publishTime>03/09/2020 09:16:10</publishTime>
     </File>
@@ -62,6 +65,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/amd64/sqlcese40.dll">
       <publishTime>09/03/2018 07:25:06</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>02/22/2013 08:43:40</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>02/22/2013 08:43:40</publishTime>
     </File>
     <File Include="bin/AutoMapper.dll">
       <publishTime>01/29/2015 09:57:28</publishTime>
@@ -396,6 +405,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/System.Web.Mvc.dll">
       <publishTime>01/28/2015 04:02:18</publishTime>
     </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>02/11/2014 15:26:04</publishTime>
+    </File>
     <File Include="bin/System.Web.Razor.dll">
       <publishTime>01/28/2015 04:02:32</publishTime>
     </File>
@@ -409,16 +421,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
     <File Include="bin/ThuanTan.Entity.dll">
-      <publishTime>03/09/2020 11:02:57</publishTime>
+      <publishTime>03/18/2020 10:19:36</publishTime>
     </File>
     <File Include="bin/ThuanTan.Entity.pdb">
-      <publishTime>03/09/2020 11:02:57</publishTime>
+      <publishTime>03/18/2020 10:19:36</publishTime>
     </File>
     <File Include="bin/ThuanTanUmbraco.dll">
-      <publishTime>03/10/2020 15:19:32</publishTime>
+      <publishTime>03/18/2020 14:22:47</publishTime>
     </File>
     <File Include="bin/ThuanTanUmbraco.pdb">
-      <publishTime>03/10/2020 15:19:32</publishTime>
+      <publishTime>03/18/2020 14:22:47</publishTime>
     </File>
     <File Include="bin/TidyNet.dll">
       <publishTime>09/03/2018 07:24:34</publishTime>
@@ -452,6 +464,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/UmbracoExamine.dll">
       <publishTime>09/03/2018 07:24:36</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>07/17/2013 17:03:52</publishTime>
     </File>
     <File Include="bin/x86/Microsoft.VC90.CRT/Microsoft.VC90.CRT.manifest">
       <publishTime>09/03/2018 07:25:06</publishTime>
@@ -1282,7 +1297,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/09/2020 09:16:10</publishTime>
     </File>
     <File Include="Scripts/cartController.js">
-      <publishTime>03/10/2020 12:04:38</publishTime>
+      <publishTime>03/18/2020 11:08:53</publishTime>
     </File>
     <File Include="Scripts/filterProductController.js">
       <publishTime>03/10/2020 09:29:44</publishTime>
@@ -1297,7 +1312,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/09/2020 09:16:10</publishTime>
     </File>
     <File Include="Scripts/jquery.main.js">
-      <publishTime>03/10/2020 13:39:55</publishTime>
+      <publishTime>03/18/2020 09:52:29</publishTime>
     </File>
     <File Include="Scripts/jquery.min.js">
       <publishTime>03/09/2020 09:16:10</publishTime>
@@ -1328,6 +1343,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Templates/Emails/approved.html">
       <publishTime>03/09/2020 11:00:17</publishTime>
+    </File>
+    <File Include="Templates/Emails/checkOut.html">
+      <publishTime>03/18/2020 13:39:26</publishTime>
     </File>
     <File Include="Templates/Emails/docx/INVITATIONLETTER.docx">
       <publishTime>03/09/2020 09:16:10</publishTime>
@@ -6001,7 +6019,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2020 13:29:39</publishTime>
     </File>
     <File Include="Views/Master.cshtml">
-      <publishTime>03/10/2020 14:20:38</publishTime>
+      <publishTime>03/18/2020 14:20:48</publishTime>
     </File>
     <File Include="Views/MemberInfo.cshtml">
       <publishTime>03/09/2020 09:16:10</publishTime>
@@ -6028,16 +6046,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/09/2020 09:16:10</publishTime>
     </File>
     <File Include="Views/Partials/CartApi/_ViewCart.cshtml">
-      <publishTime>03/09/2020 09:16:10</publishTime>
+      <publishTime>03/18/2020 14:01:23</publishTime>
     </File>
     <File Include="Views/Partials/Checkout/Information/_information.cshtml">
       <publishTime>03/09/2020 09:16:10</publishTime>
     </File>
     <File Include="Views/Partials/Checkout/Product/_ItemInCart.cshtml">
-      <publishTime>03/09/2020 09:16:10</publishTime>
+      <publishTime>03/18/2020 12:00:20</publishTime>
     </File>
     <File Include="Views/Partials/Checkout/_checkout.cshtml">
-      <publishTime>03/09/2020 09:16:10</publishTime>
+      <publishTime>03/18/2020 10:30:36</publishTime>
     </File>
     <File Include="Views/Partials/Checkout/_Form.cshtml">
       <publishTime>03/10/2020 13:48:07</publishTime>
@@ -6136,7 +6154,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2020 13:26:50</publishTime>
     </File>
     <File Include="Views/ProductItem.cshtml">
-      <publishTime>03/09/2020 14:04:34</publishTime>
+      <publishTime>03/18/2020 09:52:03</publishTime>
     </File>
     <File Include="Views/Search.cshtml">
       <publishTime>03/10/2020 14:30:45</publishTime>
@@ -6166,7 +6184,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/09/2020 09:16:10</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/09/2020 11:02:59</publishTime>
+      <publishTime>03/18/2020 14:22:49</publishTime>
     </File>
   </ItemGroup>
 </Project>

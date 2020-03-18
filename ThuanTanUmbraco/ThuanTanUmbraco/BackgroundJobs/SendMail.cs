@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Web.Hosting;
 using Hangfire;
 using ThuanTanUmbraco.ClassHelper;
 using ThuanTanUmbraco.Mailer;
+using ThuanTanUmbraco.Models;
 using ThuanTanUmbraco.TemplateEngine;
 
 namespace ThuanTanUmbraco.BackgroundJobs
@@ -48,6 +50,23 @@ namespace ThuanTanUmbraco.BackgroundJobs
             newMessage.Body = _textTemplate.Render("emailContact", new { title, name, phone, email, message });
             await _emailSender.SendAsync(newMessage);
         }
+        public async Task SendMailCheckOut(string emailReceive, string title, string name, string email, string phone, string address, string note, string paymentMethods, List<CartItem> cartItems)
+        {
+            var cartItemsString = new List<string>();
+            if (cartItems != null)
+            {
+                foreach (var item in cartItems)
+                {
+                    var objectString = item.Name + "(" + item.Color + ") x" + item.Quantity;
+                    cartItemsString.Add(objectString);
+                }
+            }
+            var newMessage = _emailSender.CreateNoReplyEmail();
+            newMessage.To = emailReceive;
+            newMessage.Subject = title;
+            newMessage.Body = _textTemplate.Render("checkOut", new { title, name, email, phone, address, note, paymentMethods, cartItemsString });
+            await _emailSender.SendAsync(newMessage);
+        }
         public static void EnqueueForgotPassword(string email, string title, string newPassword)
         {
             BackgroundJob.Enqueue<SendMail>(s => s.SendMailResetPassword(email, title, newPassword));
@@ -59,6 +78,10 @@ namespace ThuanTanUmbraco.BackgroundJobs
         public static void EnqueueContact(string title, string emailReceive, string name, string phone, string email, string message)
         {
             BackgroundJob.Enqueue<SendMail>(s => s.SendMailContact(title, emailReceive, name, phone, email, message));
+        }
+        public static void EnqueueCheckOut(string emailReceive, string title, string name, string email, string phone, string address, string note, string paymentMethods, List<CartItem> cartItems)
+        {
+            BackgroundJob.Enqueue<SendMail>(s => s.SendMailCheckOut(emailReceive, title, name, email, phone, address, note, paymentMethods, cartItems));
         }
     }
 }

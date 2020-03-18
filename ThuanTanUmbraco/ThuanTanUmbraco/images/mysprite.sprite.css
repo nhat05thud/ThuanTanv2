@@ -2,7 +2,7 @@
 This is an example of how to use the image sprite in your own CSS files
 */
 .mysprite {
-	background-image: url("mysprite.sprite.png");
+	background-image: url("/images/mysprite.sprite.png");
 	background-repeat: no-repeat;
 	display: inline-block;
 }

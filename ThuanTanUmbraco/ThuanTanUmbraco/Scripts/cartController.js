@@ -7,7 +7,7 @@
 
         id: ".product-colors .item.active",
         parents: ".wrap-product-detail",
-        image: ".main-image > img",
+        image: ".main-image img",
         title: "a.item-title",
         price: ".current-price > span",
         

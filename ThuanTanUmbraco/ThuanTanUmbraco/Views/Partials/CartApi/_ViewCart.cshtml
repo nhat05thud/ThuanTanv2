@@ -25,9 +25,12 @@
         vertical-align: top;
         font-size: 14px;
     }
-    .group-products .list-products .item .img {
-        width: 75px;
-    }
+        .group-products .list-products .item .img {
+            width: 75px;
+            border: 1px solid #ddd;
+            padding: 2px;
+            border-radius: 2px;
+        }
     .group-products .list-products .item .img img {
         width: 100%;
     }
@@ -66,16 +69,17 @@
             {
                 var culture = CultureInfo.CurrentCulture;
                 var item = new RenderModel(Umbraco.TypedContent(node.ProductId), culture).Content;
-                var thumb = Umbraco.TypedMedia(item.GetPropertyValue<int>("image"));
+                var colorNested = item.GetPropertyValue<IEnumerable<IPublishedContent>>("productColors").FirstOrDefault(x => x.GetPropertyValue<string>("color").Trim().Replace(" ", "") == node.Color.Trim().Replace(" ", ""));
+                var thumb = Umbraco.TypedMedia(colorNested.GetPropertyValue<int>("image"));
                 total += node.Price * node.Quantity;
                 <div class="item">
                     <div class="img">
-                        <a href="@item.Url">
-                            <img src="@(thumb != null ? thumb.GetCropUrl(75, 75, furtherOptions: "&slimmage=true") : "https://via.placeholder.com/75x75")" alt="@item.Name" />
+                        <a href="@item.Url" target="_blank">
+                            <img src="@(thumb != null ? thumb.GetCropUrl(75, 75, imageCropMode: ImageCropMode.BoxPad, furtherOptions: "&bgcolor=fff&slimmage=true") : "https://via.placeholder.com/75x75")" alt="@item.Name" />
                         </a>
                     </div>
                     <div class="content">
-                        <a href="@item.Url">@item.Name</a>
+                        <a href="@item.Url" target="_blank">@item.Name</a>
                         <p class="price"><span>@(string.Format("{0:#,0}", node.Price)) VND</span> x@(node.Quantity)</p>
                         <p class="color">Màu: @(node.Color)</p>
                     </div>

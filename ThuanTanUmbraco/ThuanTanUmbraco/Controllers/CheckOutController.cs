@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using ThuanTan.Entity.Context;
 using ThuanTan.Entity.Models;
@@ -61,6 +62,15 @@ namespace ThuanTanUmbraco.Controllers
                     }
                     db.SaveChanges();
                 }
+                var emailReceive = WebConfigurationManager.AppSettings["EmailContactReceive"];
+                BackgroundJobs.SendMail.EnqueueCheckOut(emailReceive, "Email mua sản phẩm", 
+                    cartModel.Name, 
+                    cartModel.Email, 
+                    cartModel.PhoneNumber, 
+                    cartModel.Address, 
+                    cartModel.Note, 
+                    cartModel.PaymentMethods, 
+                    model.CartItems != null && model.CartItems.Count > 0 ? model.CartItems : null);
                 model.IsSuccess = true;
                 Session["Cart"] = null;
                 return PartialView("~/Views/Partials/Checkout/_Form.cshtml", model);
