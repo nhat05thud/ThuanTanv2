@@ -141,7 +141,6 @@
                             else
                             {
                                 <img class="item-image" src="https://via.placeholder.com/270x240" alt="@item.Name" />
-                                <b>1</b>
                             }
                             @if (item.GetPropertyValue<double>("promotion") > 0)
                             {
@@ -150,7 +149,7 @@
                         </a>
                     </div>
                     <div class="content">
-                        <a class="item-title" data-id="@item.Id" href="@item.Url">@item.Name</a>
+                        <a class="item-title" data-id="@item.Id" href="@item.Url">@item.GetPropertyValue("productName")</a>
                         <div class="desc">
                             @item.GetPropertyValue("description")
                         </div>
