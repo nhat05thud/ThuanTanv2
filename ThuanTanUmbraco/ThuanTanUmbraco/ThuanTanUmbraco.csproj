@@ -415,7 +415,9 @@
     <Content Include="Templates\Emails\emailContact.html" />
     <Content Include="Templates\Emails\resetPassword.html" />
     <Content Include="Templates\Emails\verifyRegister.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Partials\CartApi\_CartApi.cshtml" />
     <Content Include="Views\Partials\CartApi\_ViewCart.cshtml" />
     <Content Include="Views\Partials\Cart\CartDetail\_Cart.cshtml" />
@@ -506,7 +508,6 @@
     <Content Include="config\imageprocessor\processing.config" />
     <Content Include="config\imageprocessor\cache.config" />
     <Content Include="App_Plugins\ModelsBuilder\package.manifest" />
-    <Content Include="Media\Web.config" />
     <Content Include="config\umbracoSettings.config" />
     <Content Include="config\trees.config" />
     <Content Include="config\tinyMceConfig.config" />
