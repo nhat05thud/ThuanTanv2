@@ -723,19 +723,30 @@
     width: 100%;
 }
 
-.item__grid--2 .img p.percent {
+.item__grid--2 .img p.circle-pop {
     position: absolute;
     top: 5px;
     right: 5px;
-    background: red;
     font-size: 16px;
     color: #fff;
     height: 43px;
+    width: 43px;
     line-height: 43px;
     text-align: center;
     border-radius: 50%;
-    padding: 0 5px;
 }
+
+    .item__grid--2 .img p.circle-pop.percent {
+        background: red;
+    }
+
+    .item__grid--2 .img p.circle-pop.new {
+        background: #8AAC62;
+    }
+
+    .item__grid--2 .img p.circle-pop.gift {
+        background: #75BBBB;
+    }
 
 .item__grid--2 .content {
     margin-top: 10px;

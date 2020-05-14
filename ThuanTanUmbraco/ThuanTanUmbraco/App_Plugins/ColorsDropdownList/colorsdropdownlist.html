@@ -1,0 +1,5 @@
+﻿<div ng-controller="My.ColorsDropdownList">
+    <select id="color-dropdown-picker" class="umb-editor">
+        <option ng-repeat="item in items" ng-selected="{{custom.indexOf(item.Name) != -1}}">{{ item.Name }}</option>
+    </select>
+</div>

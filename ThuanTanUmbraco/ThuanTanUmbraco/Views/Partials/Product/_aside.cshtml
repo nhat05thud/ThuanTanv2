@@ -47,25 +47,29 @@
     @{
         var listColors = new List<ProductColor>();
         var items = node;
-        foreach (var item in items)
+        var manageProductColors = Model.Content.Site().FirstChild("manageProductColors");
+        if (manageProductColors != null)
         {
-            var colorNested = item.GetPropertyValue<List<IPublishedContent>>("productColors");
-            if (colorNested != null)
+            foreach (var item in items)
             {
-                foreach (var color in colorNested)
+                var colorNested = item.GetPropertyValue<List<IPublishedContent>>("productColors");
+                if (colorNested != null)
                 {
-                    var getColor = ListProductColors.ProductColors.FirstOrDefault(x => x.Key == color.GetPropertyValue<string>("color").Trim().Replace(" ", ""));
-                    if (getColor != null)
+                    foreach (var color in colorNested)
                     {
-                        var colorProperties = new ProductColor
+                        var getColor = manageProductColors.Children.FirstOrDefault(x => x.Name == color.GetPropertyValue<string>("color"));
+                        if (getColor != null)
                         {
-                            Key = color.GetPropertyValue<string>("color"),
-                            Value = getColor.Value
-                        };
-                        var containsItem = listColors.Any(x => x.Key == colorProperties.Key);
-                        if (!containsItem)
-                        {
-                            listColors.Add(colorProperties);
+                            var colorProperties = new ProductColor
+                            {
+                                Key = color.GetPropertyValue<string>("color"),
+                                Value = getColor.GetPropertyValue<string>("value")
+                            };
+                            var containsItem = listColors.Any(x => x.Key == colorProperties.Key);
+                            if (!containsItem)
+                            {
+                                listColors.Add(colorProperties);
+                            }
                         }
                     }
                 }

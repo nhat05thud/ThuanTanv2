@@ -59,7 +59,7 @@
             {
                 foreach (var color in colorNested)
                 {
-                    if (listColors.Contains(color.GetPropertyValue<string>("color").Replace(" ", ""))
+                    if (!string.IsNullOrEmpty(color.GetPropertyValue<string>("color")) && listColors.Contains(color.GetPropertyValue<string>("color").Replace(" ", ""))
                         && !items.Contains(item))
                     {
                         items.Add(item);
@@ -144,7 +144,15 @@
                             }
                             @if (item.GetPropertyValue<double>("promotion") > 0)
                             {
-                                <p class="percent">-@(item.GetPropertyValue<double>("promotion"))%</p>
+                                <p class="circle-pop percent">-@(item.GetPropertyValue<double>("promotion"))%</p>
+                            }
+                            @if (item.GetPropertyValue<bool>("isNew"))
+                            {
+                                <p class="circle-pop new">New</p>
+                            }
+                            @if (item.GetPropertyValue<bool>("isGift"))
+                            {
+                                <p class="circle-pop gift">Gift</p>
                             }
                         </a>
                     </div>
@@ -184,18 +192,20 @@
     </div>
     @if (totalPages > 1)
     {
+        var queryWithoutPage = System.Web.HttpUtility.ParseQueryString(HttpContext.Current.Request.QueryString.ToString());
+        queryWithoutPage.Remove("page");
         <div class="pager text-center">
             @if (page > 1)
             {
-                <a class="prev" href="?page=@(page-1)"><i class="fa fa-angle-left"></i></a>
+                <a class="prev" href="@(Request.QueryString != null ? "?" + queryWithoutPage + "&" : "?")page=@(page-1)"><i class="fa fa-angle-left"></i></a>
             }
             @for (int p = 1; p < totalPages + 1; p++)
             {
-                <a class="@(p == page ? "current" : string.Empty)" href="?page=@p">@p</a>
+                <a class="@(p == page ? "current" : string.Empty)" href="@(Request.QueryString != null ? "?" + queryWithoutPage + "&" : "?")page=@p">@p</a>
             }
             @if (page < totalPages)
             {
-                <a class="next" href="?page=@(page+1)"><i class="fa fa-angle-right"></i></a>
+                <a class="next" href="@(Request.QueryString != null ? "?" + queryWithoutPage + "&" : "?")page=@(page+1)"><i class="fa fa-angle-right"></i></a>
             }
         </div>
     }

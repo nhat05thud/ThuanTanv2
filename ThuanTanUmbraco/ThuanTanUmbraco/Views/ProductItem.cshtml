@@ -138,22 +138,23 @@
         <div class="tab-content">
             <div class="tab-pane active" id="tab1">
                 <div class="w970 custom__width">
+                    @{
+                        var linkVideo = Model.Content.GetPropertyValue<string>("videoLink");
+                        var videoUpload = Umbraco.TypedMedia(Model.Content.GetPropertyValue<int>("videoUpload"));
+                    }
+                    @if (videoUpload != null)
+                    {
+                        <video width="100%" controls playsinline><source src="@videoUpload.Url" type="video/mp4" /></video>
+                    }
+                    else if (!string.IsNullOrEmpty(linkVideo))
+                    {
+                        <div class="video-youtube__container">
+                            <iframe src="@linkVideo" width="100%" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    }
                     <div class="wrap-content">
                         @node.GetPropertyValue("content")
                     </div>
-					@{
-						var linkVideo = Model.Content.GetPropertyValue<string>("videoLink");
-						var videoUpload = Umbraco.TypedMedia(Model.Content.GetPropertyValue<int>("videoUpload"));
-					}
-					@if (videoUpload != null)
-					{
-						<video width="100%" controls playsinline><source src="@videoUpload.Url" type="video/mp4"/></video>
-					}else if(!string.IsNullOrEmpty(linkVideo))
-					{
-						<div class="video-youtube__container">
-							<iframe src="@linkVideo" width="100%" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen ></iframe>
-						</div>
-					}
                 </div>
             </div>
             <div class="tab-pane" id="tab2">
@@ -186,7 +187,15 @@
                             }
                             @if (item.GetPropertyValue<double>("promotion") > 0)
                             {
-                                <p class="percent">-@(item.GetPropertyValue<double>("promotion"))%</p>
+                                <p class="circle-pop percent">-@(item.GetPropertyValue<double>("promotion"))%</p>
+                            }
+                            @if (item.GetPropertyValue<bool>("isNew"))
+                            {
+                                <p class="circle-pop new">New</p>
+                            }
+                            @if (item.GetPropertyValue<bool>("isGift"))
+                            {
+                                <p class="circle-pop gift">Gift</p>
                             }
                         </a>
                     </div>

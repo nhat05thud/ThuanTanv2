@@ -1,0 +1,23 @@
+﻿{
+  //array of files we want to inject into the application on app_start
+  // you can define multiple editors
+  "propertyEditors": [
+    {
+      /*this must be a unique alias*/
+      "alias": "My.ColorsDropdownList",
+      /*the name*/
+      "name": "My ColorsDropdownList",
+      /*the icon*/
+      "icon": "icon-code",
+      /*grouping for "Select editor" dialog*/
+      "group": "Dropdown",
+      /*the HTML file we will load for the editor*/
+      "editor": {
+        "view": "~/App_Plugins/ColorsDropdownList/colorsdropdownlist.html"
+      }
+    }
+  ],
+  "javascript": [
+    "~/App_Plugins/ColorsDropdownList/colorsdropdownlist.controller.js"
+  ]
+}

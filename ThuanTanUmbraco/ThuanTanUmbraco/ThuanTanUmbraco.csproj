@@ -275,6 +275,8 @@
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.controller.js" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.htm" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.resource.js" />
+    <Content Include="App_Plugins\ColorsDropdownList\colorsdropdownlist.controller.js" />
+    <Content Include="App_Plugins\ColorsDropdownList\colorsdropdownlist.html" />
     <Content Include="App_Plugins\TinyMceTemplates\templates-config.html" />
     <Content Include="config\grid.editors.config.js" />
     <Content Include="config\Lang\cs-CZ.user.xml" />
@@ -395,6 +397,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\cartController.js" />
     <Content Include="Scripts\filterProductController.js" />
+    <Content Include="App_Plugins\ColorsDropdownList\package.manifest" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -479,6 +482,7 @@
     <Compile Include="Controllers\CartBackendController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckOutController.cs" />
+    <Compile Include="Controllers\ColorsDropdownListController.cs" />
     <Compile Include="Controllers\MemberFrontEndController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ShoppingCartTreeController.cs" />
@@ -691,7 +695,9 @@
       <Name>ThuanTan.Entity</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\ColorsDropdownList\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -26,7 +26,7 @@ namespace ThuanTanUmbraco
             Application.Lock();
             var culture = System.Globalization.CultureInfo.CurrentCulture;
             var n = ApplicationContext.Current.Services.ContentService.GetRootContent().First(x => x.GetCulture().Name == culture.Name);
-            var m = n.Children().FirstOrDefault(x => x.ContentType.Alias == "visitor");
+            var m = n?.Children().FirstOrDefault(x => x.ContentType.Alias == "visitor");
             if (m != null)
             {
                 try
